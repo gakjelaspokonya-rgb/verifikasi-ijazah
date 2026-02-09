@@ -1,112 +1,110 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verifikasi Ijazah Elektronik</title>
 
 <style>
+
 body{
-font-family:Arial, sans-serif;
-background:#f4f7fb;
+font-family:Arial;
 margin:0;
+background:#f3f6f9;
 }
 
 /* HEADER */
 .header{
-background:linear-gradient(90deg,#0b3c74,#f2c200);
-color:white;
-padding:15px 25px;
 display:flex;
 align-items:center;
-gap:15px;
+gap:20px;
+padding:20px 30px;
+color:white;
+font-weight:bold;
+font-size:22px;
+background:linear-gradient(90deg,#0c3c78,#e2b007);
 }
 
 .header img{
-height:60px;
+height:75px;
 }
 
-.header-text{
-font-size:20px;
-font-weight:bold;
-line-height:1.4;
-}
-
-/* CONTAINER */
+/* KONTEN */
 .container{
-max-width:900px;
-margin:30px auto;
+width:92%;
+margin:auto;
 background:white;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-overflow:hidden;
+padding:30px;
+margin-top:30px;
+border-radius:14px;
+box-shadow:0px 4px 15px rgba(0,0,0,0.08);
 }
 
-/* TITLE */
 .title{
 text-align:center;
-font-size:28px;
-padding:25px;
+font-size:34px;
 font-weight:bold;
+margin-bottom:30px;
 }
 
 /* STATUS BOX */
-.status{
-background:#e8f0fb;
+.status-box{
+background:#eaf3ff;
 padding:20px;
-border-left:6px solid #f2c200;
+border-left:6px solid #e2b007;
+margin-bottom:30px;
+}
+
+.status-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:20px;
 }
 
 .status-item{
 display:flex;
-align-items:center;
-gap:10px;
-margin-bottom:10px;
-font-size:16px;
-color:#0b3c74;
+gap:12px;
+align-items:flex-start;
 }
 
-/* TABLE */
-.table{
-padding:20px;
-}
-
-.row{
-display:flex;
-padding:12px 0;
-border-bottom:1px solid #eee;
+.status-item img{
+width:28px;
 }
 
 .label{
-width:250px;
-color:#666;
+font-weight:bold;
+color:#444;
+font-size:14px;
 }
 
 .value{
-color:#333;
+color:#0c3c78;
+font-size:16px;
+margin-top:3px;
 }
 
-/* BSRE AREA */
-.bsre{
+/* DATA */
+.row{
 display:flex;
-align-items:center;
-gap:15px;
-padding:20px;
-border-top:1px solid #eee;
-}
-
-.bsre img{
-height:60px;
+justify-content:space-between;
+padding:14px 0;
+border-bottom:1px solid #eee;
 }
 
 /* FOOTER */
 .footer{
-background:#0b3c74;
+margin-top:40px;
+background:#0c3c78;
 color:white;
-text-align:center;
-padding:15px;
-font-size:14px;
+padding:25px;
+display:flex;
+align-items:center;
+gap:15px;
 }
+
+.footer img{
+height:45px;
+}
+
 </style>
 </head>
 
@@ -115,78 +113,64 @@ font-size:14px;
 <!-- HEADER -->
 <div class="header">
 <img src="logo-uii.png">
-<div class="header-text">
+<div>
 Sistem Verifikasi Ijazah Elektronik<br>
 Universitas Islam Indonesia
 </div>
 </div>
 
+<!-- KONTEN -->
 <div class="container">
 
 <div class="title">VERIFIKASI IJAZAH ELEKTRONIK</div>
 
-<div class="status">
+<div class="status-box">
+
+<div class="status-grid">
 
 <div class="status-item">
-✔ Status Dokumen : Terverifikasi
+<img src="https://cdn-icons-png.flaticon.com/512/845/845646.png">
+<div>
+<div class="label">Status Dokumen</div>
+<div class="value">Terverifikasi</div>
+</div>
 </div>
 
 <div class="status-item">
-🏫 Institusi : Universitas Islam Indonesia
+<img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png">
+<div>
+<div class="label">Institusi</div>
+<div class="value">Universitas Islam Indonesia</div>
+</div>
 </div>
 
 <div class="status-item">
-💻 Sistem : Verifikasi Ijazah Elektronik
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+<div>
+<div class="label">Sistem</div>
+<div class="value">Verifikasi Ijazah Elektronik</div>
+</div>
 </div>
 
 </div>
-
-<div class="table">
-
-<div class="row">
-<div class="label">Nama Lengkap</div>
-<div class="value">Muhammad Agil</div>
 </div>
 
-<div class="row">
-<div class="label">NIK</div>
-<div class="value">35227538736528376</div>
-</div>
-
-<div class="row">
-<div class="label">Nomor Ijazah</div>
-<div class="value">UII-2025-123456</div>
-</div>
-
-<div class="row">
-<div class="label">NIM</div>
-<div class="value">123456789</div>
-</div>
-
-<div class="row">
-<div class="label">Program Studi</div>
-<div class="value">Magister Manajemen</div>
-</div>
-
-<div class="row">
-<div class="label">Fakultas</div>
-<div class="value">Fakultas Bisnis dan Ekonomika</div>
-</div>
+<div class="row"><div>Nama Lengkap</div><div>Muhammad Agil</div></div>
+<div class="row"><div>NIK</div><div>35227538736528376</div></div>
+<div class="row"><div>Nomor Ijazah</div><div>UII-2025-123456</div></div>
+<div class="row"><div>NIM</div><div>123456789</div></div>
+<div class="row"><div>Program Studi</div><div>Magister Manajemen</div></div>
+<div class="row"><div>Fakultas</div><div>Fakultas Bisnis dan Ekonomika</div></div>
 
 </div>
 
-<!-- BSRE -->
-<div class="bsre">
+<!-- FOOTER BSRE -->
+<div class="footer">
 <img src="bsre-logo-baru-1024x340.png">
 <div>
-Dokumen ini ditandatangani secara elektronik menggunakan sertifikat elektronik BSrE — Badan Siber dan Sandi Negara.
+Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik
+yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE), BSSN.
 </div>
-</div>
-
-</div>
-
-<div class="footer">
-© Universitas Islam Indonesia
 </div>
 
 </body>
