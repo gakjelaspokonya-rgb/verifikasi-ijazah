@@ -7,71 +7,78 @@
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background:#f3f6fa;
-    margin:0;
+font-family:Arial, sans-serif;
+background:#f4f7fb;
+margin:0;
 }
 
 .header{
-    background:linear-gradient(90deg,#0b3c74,#1d5fa8);
-    color:white;
-    padding:20px;
-}
-
-.header h1{
-    margin:0;
-    font-size:22px;
+background:linear-gradient(90deg,#0b3c74,#f2c200);
+color:white;
+padding:20px;
+font-size:20px;
+font-weight:bold;
 }
 
 .container{
-    max-width:850px;
-    margin:30px auto;
-    background:white;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    overflow:hidden;
+max-width:850px;
+margin:30px auto;
+background:white;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+overflow:hidden;
 }
 
 .title{
-    text-align:center;
-    font-size:30px;
-    font-weight:bold;
-    padding:20px;
+text-align:center;
+font-size:28px;
+padding:20px;
+font-weight:bold;
 }
 
 .status{
-    background:#e6f4ea;
-    color:#1e7e34;
-    padding:15px;
-    font-weight:bold;
-    border-bottom:1px solid #ddd;
+background:#e8f0fb;
+color:#0b3c74;
+padding:15px 20px;
+border-left:6px solid #f2c200;
+line-height:1.8;
 }
 
 .table{
-    padding:20px;
+padding:20px;
 }
 
 .row{
-    display:flex;
-    border-bottom:1px solid #eee;
-    padding:10px 0;
+display:flex;
+padding:12px 0;
+border-bottom:1px solid #eee;
 }
 
 .label{
-    width:250px;
-    color:#555;
+width:250px;
+color:#555;
 }
 
 .value{
-    font-weight:bold;
+color:#333;
+font-weight:normal;
+}
+
+.bsre{
+text-align:center;
+padding:20px;
+}
+
+.bsre img{
+height:70px;
 }
 
 .footer{
-    background:#0b3c74;
-    color:white;
-    text-align:center;
-    padding:20px;
-    font-size:14px;
+background:#0b3c74;
+color:white;
+text-align:center;
+padding:20px;
+font-size:14px;
 }
 </style>
 </head>
@@ -79,7 +86,8 @@ body{
 <body>
 
 <div class="header">
-<h1>Sistem Verifikasi Ijazah Elektronik<br>Universitas Islam Indonesia</h1>
+Sistem Verifikasi Ijazah Elektronik<br>
+Universitas Islam Indonesia
 </div>
 
 <div class="container">
@@ -87,61 +95,54 @@ body{
 <div class="title">VERIFIKASI IJAZAH ELEKTRONIK</div>
 
 <div class="status">
-Status Ijazah: VERIFIKASI IJAZAH ELEKTRONIK
+Status Dokumen : Terverifikasi<br>
+Institusi : Universitas Islam Indonesia<br>
+Sistem : Verifikasi Ijazah Elektronik
 </div>
 
 <div class="table">
 
 <div class="row">
 <div class="label">Nama Lengkap</div>
-<div class="value">: Muhammad Agil</div>
+<div class="value">Muhammad Agil</div>
 </div>
 
-  <div class="row">
+<div class="row">
 <div class="label">NIK</div>
-<div class="value">: 35227538736528376</div>
+<div class="value">35227538736528376</div>
 </div>
 
 <div class="row">
 <div class="label">Nomor Ijazah</div>
-<div class="value">: UII-2025-123456</div>
+<div class="value">UII-2025-123456</div>
 </div>
 
 <div class="row">
 <div class="label">NIM</div>
-<div class="value">: 123456789</div>
+<div class="value">123456789</div>
 </div>
 
 <div class="row">
 <div class="label">Program Studi</div>
-<div class="value">: Magister Manajemen</div>
+<div class="value">Magister Manajemen</div>
 </div>
 
 <div class="row">
 <div class="label">Fakultas</div>
-<div class="value">: Fakultas Bisnis dan Ekonomika</div>
-</div>
-
-  <div class="row">
-<div class="label">Tanggal Masuk</div>
-<div class="value">: 3 Desember 2023</div>
-</div>
-
-<div class="row">
-<div class="label">Tanggal Lulus</div>
-<div class="value">01 Februari 2026</div>
-</div>
-
-<div class="row">
-<div class="label">Pejabat Penandatangan</div>
-<div class="value">Rektor & Dekan Fakultas</div>
+<div class="value">Fakultas Bisnis dan Ekonomika</div>
 </div>
 
 </div>
+
+<!-- LOGO BSrE -->
+<div class="bsre">
+<img src="logo-bsre.png" alt="Logo BSrE">
+</div>
+
 </div>
 
 <div class="footer">
-Dokumen ini ditandatangani secara elektronik menggunakan sertifikat elektronik BSrE — Badan Siber dan Sandi Negara.
+Dokumen ditandatangani secara elektronik menggunakan sertifikat BSrE — Badan Siber dan Sandi Negara
 <br>© Universitas Islam Indonesia
 </div>
 
