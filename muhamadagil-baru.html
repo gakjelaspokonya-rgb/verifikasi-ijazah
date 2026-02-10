@@ -3,82 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Verifikasi Ijazah Nasional</title>
+<title>Verifikasi Ijazah - Universitas Muhammadiyah Surakarta</title>
 
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial,Helvetica,sans-serif;
 margin:0;
-background:#eef2f7;
+background:#f2f6fb;
 }
 
+/* HEADER */
 .header{
-background:linear-gradient(90deg,#0b3d91,#1565c0);
-color:white;
+background:white;
 padding:15px;
-text-align:center;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:3px solid #0a4d9b;
 }
 
-.header h1{
-margin:0;
-font-size:26px;
-letter-spacing:1px;
+.header img{
+height:60px;
 }
 
-.server{
-background:#082567;
+.title-bar{
+background:#0a4d9b;
 color:white;
-padding:8px;
 text-align:center;
-font-size:14px;
+padding:18px;
+font-size:26px;
+font-weight:bold;
 }
 
+/* CONTAINER */
 .container{
 max-width:900px;
+margin:25px auto;
 background:white;
-margin:20px auto;
-padding:30px;
-border-radius:8px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.08);
 }
 
-input{
-width:100%;
-padding:14px;
-font-size:16px;
-border:1px solid #ccc;
-border-radius:6px;
-}
-
-button{
-margin-top:15px;
-padding:14px 25px;
-background:#c62828;
-color:white;
-border:none;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
-}
-
+/* STATUS */
 .status{
-margin-top:25px;
-padding:20px;
-background:#e8f5e9;
-border-left:6px solid #2e7d32;
-display:none;
-}
-
-.valid{
-color:#2e7d32;
+background:#e6f5ea;
+border-left:6px solid #28a745;
+padding:15px;
+margin-bottom:20px;
+font-size:16px;
 font-weight:bold;
-font-size:18px;
+color:#1e7e34;
 }
 
-.data{
-margin-top:15px;
-line-height:28px;
+/* IDENTITAS */
+.section-title{
+font-size:20px;
+font-weight:bold;
+margin-bottom:15px;
+color:#0a4d9b;
+border-bottom:2px solid #e1e1e1;
+padding-bottom:8px;
+}
+
+.data-row{
+display:flex;
+padding:8px 0;
+border-bottom:1px solid #eee;
+}
+
+.label{
+width:220px;
+font-weight:bold;
+}
+
+.value{
+flex:1;
+}
+
+/* BUTTON */
+.button{
+display:block;
+text-align:center;
+background:#0a4d9b;
+color:white;
+padding:12px;
+margin-top:20px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* FOOTER */
+.footer{
+margin-top:40px;
+background:#0a4d9b;
+color:white;
+text-align:center;
+padding:12px;
+font-size:14px;
 }
 
 </style>
@@ -86,50 +110,79 @@ line-height:28px;
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
-<h1>PORTAL VERIFIKASI IJAZAH ELEKTRONIK</h1>
-<p>Sistem Validasi Dokumen Akademik Terintegrasi</p>
+<img src="logo-ums.png">
+<div><strong>UNIVERSITAS MUHAMMADIYAH SURAKARTA</strong></div>
+<img src="kampus-merdeka.png">
 </div>
 
-<div class="server">
-Server Time : <span id="jam"></span>
+<div class="title-bar">
+VERIFIKASI IJAZAH
 </div>
 
 <div class="container">
 
-<h2>Cek Nomor Ijazah</h2>
-
-<input type="text" id="nomor" placeholder="Masukkan nomor ijazah">
-
-<button onclick="cek()">VERIFIKASI DATA</button>
-
-<div class="status" id="hasil">
-
-<div class="valid">✔ STATUS DOKUMEN : VALID & TERVERIFIKASI</div>
-
-<div class="data">
-Nama : Muhammad Agil<br>
-NIM : 23313164<br>
-Program Studi : Sarjana Agama (S1)<br>
-Nomor Ijazah : 92/S1/2025<br>
-Rektor : Prof. Dr. Akademik Contoh
+<div class="status">
+✔ Selamat! Data Ijazah Anda Telah Diverifikasi dan Valid.
 </div>
 
+<div class="section-title">
+IDENTITAS PEMILIK IJAZAH
 </div>
 
+<div class="data-row">
+<div class="label">Nomor Ijazah</div>
+<div class="value">020/K1/2024</div>
 </div>
 
-<script>
+<div class="data-row">
+<div class="label">NIM</div>
+<div class="value">F1234567</div>
+</div>
 
-function cek(){
-document.getElementById("hasil").style.display="block";
-}
+<div class="data-row">
+<div class="label">Nama Lengkap</div>
+<div class="value">MUHAMMAD AGIL</div>
+</div>
 
-setInterval(()=>{
-document.getElementById("jam").innerHTML=new Date().toLocaleString();
-},1000);
+<div class="data-row">
+<div class="label">Program Studi</div>
+<div class="value">S1 - TEKNIK INFORMATIKA</div>
+</div>
 
-</script>
+<div class="data-row">
+<div class="label">Jenjang Pendidikan</div>
+<div class="value">Sarjana (S1)</div>
+</div>
+
+<div class="data-row">
+<div class="label">Tempat & Tanggal Lahir</div>
+<div class="value">Surakarta, 20 Juni 2000</div>
+</div>
+
+<div class="data-row">
+<div class="label">Tanggal Lulus</div>
+<div class="value">30 Maret 2024</div>
+</div>
+
+<div class="data-row">
+<div class="label">IPK</div>
+<div class="value">3.75</div>
+</div>
+
+<div class="data-row">
+<div class="label">Rektor</div>
+<div class="value">Prof. Dr. Sofyan Anif, M.Si</div>
+</div>
+
+<a href="#" class="button">CEK ULANG IJAZAH LAIN</a>
+
+</div>
+
+<div class="footer">
+Pusat Data dan Sistem Informasi - Universitas Muhammadiyah Surakarta
+</div>
 
 </body>
 </html>
