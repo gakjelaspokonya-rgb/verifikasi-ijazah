@@ -7,50 +7,45 @@
 
 <style>
 :root{
-    --biru:#0b2a63;
-    --biru2:#1b4fa3;
+    --biru:#163d7a;
+    --biru2:#214f9c;
     --emas:#c9a227;
-    --emas2:#e6c65c;
-    --abu:#f3f6fb;
+    --abu:#f4f6fb;
 }
 
-/* BACKGROUND AKADEMIK */
+/* BACKGROUND */
 body{
     margin:0;
     font-family:"Segoe UI",Arial,sans-serif;
-    background:
-        radial-gradient(circle at top,rgba(255,255,255,.08),transparent 40%),
-        linear-gradient(135deg,var(--biru),var(--biru2));
+    background:linear-gradient(135deg,var(--biru),var(--biru2));
 }
 
-/* HEADER AKADEMIK */
+/* HEADER */
 .header{
     text-align:center;
-    padding:50px 20px 20px;
+    padding:60px 20px 20px;
 }
 
 .logo{
-    width:160px;
-    margin-bottom:10px;
+    width:150px;
+    margin-bottom:12px;
 }
 
 .judul{
     color:#fff;
-    font-size:26px;
+    font-size:28px;
     font-weight:600;
-    letter-spacing:.3px;
 }
 
 .subjudul{
-    color:#e0e6f2;
+    color:#e3e8f2;
     font-size:14px;
 }
 
-/* ORNAMEN GARIS */
-.garis-emas{
+.garis{
     width:120px;
     height:4px;
-    background:linear-gradient(to right,var(--emas),var(--emas2));
+    background:var(--emas);
     margin:18px auto 0;
     border-radius:2px;
 }
@@ -60,17 +55,16 @@ body{
     background:#fff;
     max-width:520px;
     margin:40px auto;
-    padding:40px 36px;
+    padding:40px 38px;
     border-radius:16px;
-    box-shadow:0 12px 35px rgba(0,0,0,.25);
+    box-shadow:0 14px 35px rgba(0,0,0,.25);
     border-top:6px solid var(--emas);
 }
 
-/* LABEL INPUT PROFESIONAL */
 .label-input{
     font-size:14px;
     font-weight:600;
-    color:#333;
+    color:#374151;
     margin-bottom:6px;
 }
 
@@ -78,13 +72,13 @@ input{
     width:100%;
     padding:14px;
     border-radius:8px;
-    border:1px solid #ccd3e0;
+    border:1px solid #d0d6e2;
     font-size:15px;
 }
 
 button{
     width:100%;
-    margin-top:20px;
+    margin-top:22px;
     padding:14px;
     border:none;
     border-radius:8px;
@@ -98,7 +92,6 @@ button{
     display:none;
     background:var(--abu);
     min-height:100vh;
-    padding-bottom:40px;
 }
 
 .header-hasil{
@@ -107,69 +100,93 @@ button{
 }
 
 .header-hasil img{
-    width:140px;
+    width:130px;
 }
 
-.header-hasil h2{
-    margin:10px 0 0;
-}
-
-/* KARTU HASIL */
+/* KARTU HASIL AKADEMIK */
 .kartu{
     background:#fff;
-    max-width:600px;
+    max-width:720px;
     margin:20px auto;
-    padding:32px 30px;
+    padding:40px 48px;
     border-radius:14px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    border-top:6px solid var(--emas);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    border-top:5px solid var(--emas);
 }
 
 .status-title{
     text-align:center;
-    font-size:20px;
-    font-weight:700;
+    font-size:22px;
+    font-weight:600;
     color:#1f8a3b;
+    letter-spacing:.5px;
 }
 
 .badge{
     display:inline-block;
-    padding:6px 16px;
+    margin-top:8px;
+    padding:4px 14px;
     border-radius:20px;
     font-size:13px;
-    font-weight:600;
-    background:#e6f4ea;
+    background:#e9f5ee;
     color:#1f8a3b;
-    margin-top:8px;
 }
 
-/* GRID DATA */
 .data{
-    margin-top:20px;
+    margin-top:28px;
 }
 
 .row{
-    display:flex;
+    display:grid;
+    grid-template-columns: 220px 20px 1fr;
     margin:10px 0;
-    font-size:15px;
+    font-size:15.5px;
+    line-height:1.6;
 }
 
 .label{
-    width:180px;
-    font-weight:600;
     color:#444;
+    font-weight:500;
+}
+
+.separator{
+    text-align:center;
 }
 
 .value{
-    flex:1;
+    color:#111;
 }
 
 /* TOMBOL */
 .btn-kembali{
-    max-width:600px;
-    margin:20px auto;
+    max-width:720px;
+    margin:20px auto 40px;
 }
 
+/* FOOTER AKADEMIK */
+.footer{
+    margin-top:60px;
+    background:#eef1f6;
+    border-top:1px solid #d6dbe6;
+    padding:22px 20px;
+    text-align:center;
+    font-size:13.5px;
+    color:#6b7280;
+    line-height:1.7;
+}
+
+.footer strong{
+    color:#374151;
+    font-weight:600;
+}
+
+.footer .divider{
+    width:60px;
+    height:2px;
+    background:var(--emas);
+    margin:10px auto;
+    border-radius:2px;
+}
 </style>
 </head>
 
@@ -182,7 +199,7 @@ button{
         <img src="logo-unimus.png" class="logo">
         <div class="judul">Portal Verifikasi Data Akademik</div>
         <div class="subjudul">Sistem Validasi Dosen Universitas Muhammadiyah Semarang</div>
-        <div class="garis-emas"></div>
+        <div class="garis"></div>
     </div>
 
     <div class="card">
@@ -209,8 +226,18 @@ button{
 
 </div>
 
+<!-- FOOTER -->
+<div class="footer">
+    <div><strong>Universitas Muhammadiyah Semarang</strong></div>
+    <div class="divider"></div>
+    <div>Biro Sistem Informasi dan Kepegawaian</div>
+    <div>Sistem Verifikasi Data Akademik Dosen</div>
+    <div>© <span id="tahun"></span> Universitas Muhammadiyah Semarang. All rights reserved.</div>
+</div>
+
 <script>
 
+/* DATABASE DOSEN */
 const database = [
 {
     nama: "Muhammad Agil, S.M., M.M., M.Ling.",
@@ -224,12 +251,14 @@ const database = [
 }
 ];
 
+/* FORMAT TANGGAL INDONESIA */
 function formatTanggal(){
     return new Date().toLocaleDateString("id-ID",{
         day:"numeric",month:"long",year:"numeric"
     });
 }
 
+/* VERIFIKASI */
 function verifikasiData(){
 
     const input = document.getElementById("keyword").value.toLowerCase().trim();
@@ -245,33 +274,77 @@ function verifikasiData(){
         document.getElementById("hasilKonten").innerHTML = `
             <div style="text-align:center">
                 <div class="status-title">DATA DITEMUKAN</div>
-                <div class="badge">✔ Terverifikasi</div>
+                <div class="badge">Terverifikasi</div>
             </div>
 
             <div class="data">
-                <div class="row"><div class="label">Nama Lengkap</div><div class="value">${data.nama}</div></div>
-                <div class="row"><div class="label">Jabatan Akademik</div><div class="value">${data.jabatan}</div></div>
-                <div class="row"><div class="label">Fakultas</div><div class="value">${data.fakultas}</div></div>
-                <div class="row"><div class="label">Status Kepegawaian</div><div class="value">${data.kepegawaian}</div></div>
-                <div class="row"><div class="label">NIDN/NIDK</div><div class="value">${data.nidn}</div></div>
-                <div class="row"><div class="label">Masa Penugasan</div><div class="value">${data.masaKerja}</div></div>
-                <div class="row"><div class="label">Nomor SK</div><div class="value">SK Pengangkatan No. ${data.noSK}</div></div>
-                <div class="row"><div class="label">Tanggal Verifikasi</div><div class="value">${formatTanggal()}</div></div>
+                <div class="row">
+                    <div class="label">Nama Lengkap</div>
+                    <div class="separator">:</div>
+                    <div class="value">${data.nama}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Jabatan Akademik</div>
+                    <div class="separator">:</div>
+                    <div class="value">${data.jabatan}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Fakultas</div>
+                    <div class="separator">:</div>
+                    <div class="value">${data.fakultas}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Status Kepegawaian</div>
+                    <div class="separator">:</div>
+                    <div class="value">${data.kepegawaian}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">NIDN/NIDK</div>
+                    <div class="separator">:</div>
+                    <div class="value">${data.nidn}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Masa Penugasan</div>
+                    <div class="separator">:</div>
+                    <div class="value">${data.masaKerja}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Nomor SK</div>
+                    <div class="separator">:</div>
+                    <div class="value">SK Pengangkatan No. ${data.noSK}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Tanggal Verifikasi</div>
+                    <div class="separator">:</div>
+                    <div class="value">${formatTanggal()}</div>
+                </div>
             </div>
         `;
     } else {
         document.getElementById("hasilKonten").innerHTML = `
-            <div style="text-align:center;color:#b42318;font-weight:700">
+            <div style="text-align:center;color:#b42318;font-weight:600">
                 DATA TIDAK DITEMUKAN
             </div>
         `;
     }
 }
 
+/* KEMBALI */
 function kembali(){
     document.getElementById("halamanHasil").style.display="none";
     document.getElementById("halamanAwal").style.display="block";
 }
+
+/* TAHUN FOOTER */
+document.getElementById("tahun").textContent = new Date().getFullYear();
+
 </script>
 
 </body>
