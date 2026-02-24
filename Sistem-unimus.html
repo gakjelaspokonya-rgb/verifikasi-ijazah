@@ -35,7 +35,7 @@ body{
 .header{
   background:linear-gradient(90deg,var(--biru),var(--biru2));
   color:#fff;
-  padding:18px 50px 22px;
+  padding:25px 50px 25px; /* diperbesar supaya logo muat */
   display:flex;
   align-items:center;
   gap:18px;
@@ -67,10 +67,11 @@ body{
   border:2px solid rgba(255,255,255,.08);
 }
 
+/* Logo kiri atas */
 .header img{
-  width:72px;
+  width:120px;  /* diperbesar dari 72px menjadi 120px */
+  height:auto;  /* menjaga proporsi */
 }
-
 .header-text{
   line-height:1.25;
 }
