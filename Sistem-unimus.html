@@ -35,7 +35,7 @@ body{
 .header{
   background:linear-gradient(90deg,var(--biru),var(--biru2));
   color:#fff;
-  padding:25px 50px 25px; /* diperbesar supaya logo muat */
+  padding:18px 50px 22px;
   display:flex;
   align-items:center;
   gap:18px;
@@ -67,11 +67,10 @@ body{
   border:2px solid rgba(255,255,255,.08);
 }
 
-/* Logo kiri atas */
 .header img{
-  width:120px;  /* diperbesar dari 72px menjadi 120px */
-  height:auto;  /* menjaga proporsi */
+  width:100px; /* diperbesar */
 }
+
 .header-text{
   line-height:1.25;
 }
@@ -389,6 +388,64 @@ body{
 
 @keyframes spin{to{transform:rotate(360deg);}}
 
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width:768px){
+  body{
+    padding:0;
+  }
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:18px 20px;
+    gap:12px;
+  }
+
+  .header img{
+    width:90px; /* header kiri lebih kecil */
+  }
+
+  .header-text{
+    text-align:left;
+  }
+
+  .page{
+    padding:25px 20px 50px;
+  }
+
+  .card{
+    padding:25px;
+  }
+
+  .profile-top{
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .photo{
+    width:100%;
+    max-width:250px;
+    height:auto;
+    margin:auto;
+  }
+
+  .identity-table table, .task-table table{
+    font-size:12px;
+    display:block;
+    overflow-x:auto;
+    width:100%;
+  }
+
+  .btn-row{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .logo-center img{
+    width:120px;
+  }
+}
+
 </style>
 </head>
 
@@ -555,83 +612,66 @@ body{
       <div class="sign-item">
         <b>Rektor</b><br>
         Prof. Dr. H. Masrukhi, M.Pd.<br>
-        NIP 196805041993031002
-      </div>
-
+        NIP 196805041993031
+     </div>
       <div class="line"></div>
-
       <div class="sign-item">
         <b>Dekan FEB</b><br>
         Dr. H. Sutrisno, S.E., M.Si.<br>
         NIP 197201152000121001
       </div>
-
       <div class="line"></div>
-
       <div class="sign-item">
-        <b>Dosen Terkait</b><br>
+        <b>Dosen</b><br>
         Muhammad Agil, S.M., M.M., M.Ling.<br>
         NIDK 01261627119
       </div>
     </div>
 
-    <div class="btn-row" style="justify-content:flex-start;margin-top:25px">
+    <div class="btn-row">
       <button class="btn btn-back" onclick="backProfile()">Kembali ke Profil</button>
     </div>
-
-    <div class="footer">
-      Sistem Informasi Penugasan Dosen Kontrak<br>© Universitas Muhammadiyah Semarang 2026
-    </div>
-        </div>
+  </div>
 </div>
-  
-  <script>
-// =================== PAGE SWITCH ===================
-function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+
+<script>
+function showLoading(){
+  document.getElementById("loading").classList.add("active");
+}
+function hideLoading(){
+  document.getElementById("loading").classList.remove("active");
 }
 
-// =================== SEARCH DENGAN LOADING ===================
 function search(){
-  const k = document.getElementById("keyword").value.toLowerCase();
-
-  // cek data
-  if(k.includes("agil")||k.includes("01261627119")){
-
-    // LOADING START (tampilkan loading sebelum masuk profil)
-    document.getElementById("loading").classList.add("active");
-
-    // simulasi delay 1,2 detik sebelum menampilkan profil
-    setTimeout(()=>{
-      document.getElementById("loading").classList.remove("active");
-      showPage("pageProfile");
-    }, 1200); // 1200ms = 1.2 detik
-    // LOADING END
-
-  }else{
-    alert("Data tidak ditemukan");
-  }
+  let k=document.getElementById("keyword").value.trim();
+  if(k===""){alert("Masukkan kata kunci");return;}
+  showLoading();
+  setTimeout(()=>{
+    document.getElementById("pageSearch").classList.remove("active");
+    document.getElementById("pageProfile").classList.add("active");
+    hideLoading();
+  },600);
 }
-
-// =================== BACK & TASK DENGAN LOADING ===================
-function backSearch(){ showPage("pageSearch"); }
 
 function openTask(){
-
-  // LOADING START (tampilkan loading sebelum masuk pageTask)
-  document.getElementById("loading").classList.add("active");
-
+  showLoading();
   setTimeout(()=>{
-    document.getElementById("loading").classList.remove("active");
-    showPage("pageTask");
-  }, 1200);
-  // LOADING END
-
+    document.getElementById("pageProfile").classList.remove("active");
+    document.getElementById("pageTask").classList.add("active");
+    hideLoading();
+  },600);
 }
 
-function backProfile(){ showPage("pageProfile"); }
-  </script>
-  
+function backSearch(){
+  document.getElementById("pageProfile").classList.remove("active");
+  document.getElementById("pageSearch").classList.add("active");
+}
+
+function backProfile(){
+  document.getElementById("pageTask").classList.remove("active");
+  document.getElementById("pageProfile").classList.add("active");
+}
+</script>
+
 </body>
 </html>
