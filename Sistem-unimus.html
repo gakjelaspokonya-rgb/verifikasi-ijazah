@@ -407,4 +407,29 @@ function search(){
   loading.classList.add("active");
 
   // Delay 0,9 detik (900ms)
-  setTimeout(()
+  setTimeout(()</div>
+  </div>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function search(){
+  const k=document.getElementById("keyword").value.toLowerCase();
+  if(k.includes("agil")||k.includes("01261627119")){
+    showPage("pageProfile");
+  }else{
+    alert("Data tidak ditemukan");
+  }
+}
+
+function backSearch(){showPage("pageSearch");}
+function openTask(){showPage("pageTask");}
+function backProfile(){showPage("pageProfile");}
+</script>
+
+</body>
+</html>
