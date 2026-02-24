@@ -6,6 +6,7 @@
 <title>Sistem Informasi Dosen Kontrak</title>
 
 <style>
+
 /* ================= ROOT WARNA ================= */
 :root{
   --biru:#0b3c74;
@@ -18,13 +19,15 @@
   --border:#dbe2ec;
   --text:#1f2937;
   --muted:#6b7280;
+  --grad1:#eef3ff;
+  --grad2:#f8fbff;
 }
 
 /* ================= GLOBAL ================= */
 body{
   margin:0;
   font-family:"Segoe UI",Arial,Helvetica;
-  background:var(--bg);
+  background:linear-gradient(180deg,#eef2f7,#e9eff7);
   color:var(--text);
 }
 
@@ -38,63 +41,61 @@ body{
   gap:18px;
   border-bottom:4px solid var(--emas);
 }
-.header img{
-  width:70px;
-}
-.header-text .u{
-  font-size:15px;
-  opacity:.9;
-}
-.header-text .n{
-  font-size:24px;
-  font-weight:600;
-}
+.header img{width:70px;}
+.header-text .u{font-size:15px;opacity:.9;}
+.header-text .n{font-size:24px;font-weight:600;}
 
 /* ================= HALAMAN ================= */
-.page{
-  display:none;
-  padding:40px 60px 70px;
-}
-.page.active{
-  display:block;
-}
+.page{display:none;padding:45px 60px 80px;}
+.page.active{display:block;}
 
 /* ================= CARD ================= */
 .card{
   background:var(--card);
   border-radius:18px;
-  padding:35px;
-  box-shadow:0 15px 40px rgba(0,0,0,.12);
+  padding:40px;
+  box-shadow:0 20px 50px rgba(0,0,0,.12);
   border-top:6px solid var(--emas);
+  position:relative;
+  overflow:hidden;
 }
 
-/* ================= PENCARIAN ================= */
-.search-box{
-  max-width:560px;
-  margin:auto;
-  text-align:center;
+/* ornamen */
+.card:before{
+  content:"";
+  position:absolute;
+  right:-60px;
+  top:-60px;
+  width:200px;
+  height:200px;
+  background:radial-gradient(circle,var(--emas2),transparent 70%);
+  opacity:.25;
 }
-.search-logo{
-  width:120px;
-  margin-bottom:10px;
+.card:after{
+  content:"";
+  position:absolute;
+  left:-60px;
+  bottom:-60px;
+  width:200px;
+  height:200px;
+  background:radial-gradient(circle,var(--biru3),transparent 70%);
+  opacity:.15;
 }
-.search-title{
-  font-size:22px;
-  color:var(--biru);
-  font-weight:600;
-}
-.search-sub{
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:25px;
-}
+
+/* ================= SEARCH ================= */
+.search-box{max-width:600px;margin:auto;text-align:center;}
+.search-logo{width:140px;margin-bottom:12px;}
+.search-title{font-size:24px;color:var(--biru);font-weight:700;}
+.search-sub{font-size:13px;color:var(--muted);margin-bottom:25px;}
 
 .search-input{
   width:100%;
   padding:15px;
-  border-radius:10px;
+  border-radius:12px;
   border:1px solid var(--border);
   font-size:14px;
+  background:linear-gradient(180deg,var(--grad1),var(--grad2));
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.05);
 }
 
 .btn{
@@ -103,18 +104,21 @@ body{
   border:none;
   cursor:pointer;
   font-weight:600;
+  transition:.2s;
 }
 .btn-primary{
   background:linear-gradient(90deg,var(--biru),var(--biru2));
   color:#fff;
 }
-.btn-secondary{
-  background:#e5e7eb;
+.btn-primary:hover{transform:translateY(-1px);}
+.btn-back{
+  background:linear-gradient(90deg,#dbeafe,#bfdbfe);
+  color:#0b3c74;
 }
 .btn-row{
-  margin-top:18px;
+  margin-top:20px;
   display:flex;
-  gap:10px;
+  gap:12px;
   justify-content:center;
 }
 
@@ -126,52 +130,42 @@ body{
   padding-top:12px;
 }
 
-/* ================= PROFIL ================= */
+/* ================= PROFILE ================= */
+.logo-center{
+  text-align:center;
+  margin-bottom:25px;
+}
+.logo-center img{width:150px;}
+
 .profile-top{
   display:flex;
   gap:30px;
 }
 
 .photo{
-  width:180px;
-  height:230px;
+  width:190px;
+  height:240px;
   border-radius:14px;
   overflow:hidden;
   border:5px solid #e6eaf1;
 }
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+.photo img{width:100%;height:100%;object-fit:cover;}
 
-.identity-table{
-  flex:1;
-}
-.identity-table table{
-  width:100%;
-  border-collapse:collapse;
-}
+.identity-table{flex:1;}
+.identity-table table{width:100%;border-collapse:collapse;}
 .identity-table td{
   border:1px solid var(--border);
   padding:10px 14px;
   font-size:14px;
 }
-.identity-table tr:nth-child(odd){
-  background:#f8fafc;
-}
+.identity-table tr:nth-child(odd){background:#f8fafc;}
 .identity-table td:first-child{
-  width:220px;
+  width:230px;
   font-weight:600;
   color:var(--biru);
 }
 
-/* badge pendidikan */
-.edu{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
+.edu{display:flex;gap:8px;flex-wrap:wrap;}
 .edu span{
   border:1px solid var(--border);
   padding:5px 10px;
@@ -183,23 +177,27 @@ body{
 /* section */
 .section-title{
   margin-top:30px;
-  font-size:18px;
+  font-size:19px;
   color:var(--biru);
-  font-weight:600;
+  font-weight:700;
   border-left:4px solid var(--emas);
   padding-left:10px;
 }
 
-/* ================= TUGAS ================= */
-.task-table{
-  margin-top:15px;
+.profile-text{
+  margin-top:10px;
+  line-height:1.8;
+  font-size:14.5px;
+  text-align:justify;
 }
-.task-table table{
-  width:100%;
-  border-collapse:collapse;
-}
+
+/* ================= TASK ================= */
+.task-logo{text-align:center;margin-bottom:20px;}
+.task-logo img{width:140px;}
+
+.task-table table{width:100%;border-collapse:collapse;}
 .task-table th{
-  background:var(--biru);
+  background:linear-gradient(90deg,var(--biru),var(--biru2));
   color:#fff;
   padding:10px;
   font-size:14px;
@@ -209,26 +207,16 @@ body{
   padding:9px;
   font-size:14px;
 }
-.task-table tr:nth-child(even){
-  background:#f6f9ff;
-}
+.task-table tr:nth-child(even){background:#f6f9ff;}
 
-/* pejabat */
 .sign{
   margin-top:40px;
   border-top:2px solid var(--border);
   padding-top:20px;
 }
-.sign-item{
-  margin-bottom:14px;
-}
-.line{
-  height:1px;
-  background:var(--border);
-  margin:10px 0;
-}
+.sign-item{margin-bottom:14px;}
+.line{height:1px;background:var(--border);margin:10px 0;}
 
-/* footer */
 .footer{
   margin-top:35px;
   text-align:center;
@@ -252,7 +240,7 @@ body{
   </div>
 </div>
 
-<!-- ================= PAGE SEARCH ================= -->
+<!-- ================= SEARCH ================= -->
 <div id="pageSearch" class="page active">
   <div class="card search-box">
 
@@ -264,7 +252,7 @@ body{
     </div>
 
     <input id="keyword" class="search-input"
-      placeholder="Contoh: Muhammad Agil / 01261627119">
+      placeholder="Masukkan Nama atau NIDN / NIDK">
 
     <div class="btn-row">
       <button class="btn btn-primary" onclick="search()">Cari Data</button>
@@ -278,9 +266,13 @@ body{
   </div>
 </div>
 
-<!-- ================= PAGE PROFILE ================= -->
+<!-- ================= PROFILE ================= -->
 <div id="pageProfile" class="page">
   <div class="card">
+
+    <div class="logo-center">
+      <img src="logo-unimus.png">
+    </div>
 
     <div class="profile-top">
       <div class="photo">
@@ -314,15 +306,21 @@ body{
       </div>
     </div>
 
-    <div class="section-title">Profil Singkat</div>
-    <p>
-      Muhammad Agil merupakan dosen kontrak pada Program Studi Manajemen Bisnis
-      dan Sumber Daya Manusia Universitas Muhammadiyah Semarang dengan fokus
-      keilmuan pada manajemen organisasi dan pemasaran.
-    </p>
+    <div class="section-title">Profil Akademik</div>
+    <div class="profile-text">
+      Muhammad Agil merupakan dosen kontrak pada Program Studi Manajemen Bisnis dan
+      Sumber Daya Manusia Fakultas Ekonomi dan Bisnis Universitas Muhammadiyah
+      Semarang. Memiliki latar belakang pendidikan multidisiplin pada bidang
+      manajemen dan ilmu lingkungan, serta pengalaman akademik dalam pengajaran
+      mata kuliah manajemen organisasi, pemasaran, dan etika bisnis. Selama masa
+      kontrak akademik, yang bersangkutan berperan aktif dalam kegiatan pembelajaran,
+      pengembangan materi ajar, serta pendampingan mahasiswa pada kegiatan akademik
+      dan praktikum. Fokus keilmuan mencakup manajemen sumber daya manusia,
+      perilaku organisasi, dan kewirausahaan berbasis keberlanjutan.
+    </div>
 
     <div class="btn-row" style="justify-content:space-between;margin-top:30px">
-      <button class="btn btn-secondary" onclick="backSearch()">Kembali</button>
+      <button class="btn btn-back" onclick="backSearch()">Kembali</button>
       <button class="btn btn-primary" onclick="openTask()">Lihat Penugasan</button>
     </div>
 
@@ -335,15 +333,20 @@ body{
   </div>
 </div>
 
-<!-- ================= PAGE TASK ================= -->
+<!-- ================= TASK ================= -->
 <div id="pageTask" class="page">
   <div class="card">
+
+    <div class="task-logo">
+      <img src="logo-unimus.png">
+    </div>
 
     <div class="section-title">Penugasan Pengajaran</div>
     <p>
       Berdasarkan Surat Tugas Fakultas Ekonomi dan Bisnis Universitas Muhammadiyah
-      Semarang, dosen kontrak Muhammad Agil ditugaskan mengampu mata kuliah selama
-      periode 2 Maret 2026 sampai 2 Juni 2026 dengan total beban 12 SKS.
+      Semarang, dosen kontrak Muhammad Agil ditetapkan melaksanakan kegiatan
+      pengajaran pada semester genap tahun akademik 2025/2026 selama periode
+      2 Maret 2026 sampai 2 Juni 2026 dengan total beban mengajar 12 SKS.
     </p>
 
     <div class="task-table">
@@ -387,7 +390,7 @@ body{
     </div>
 
     <div class="btn-row" style="justify-content:flex-start;margin-top:25px">
-      <button class="btn btn-secondary" onclick="backProfile()">Kembali ke Profil</button>
+      <button class="btn btn-back" onclick="backProfile()">Kembali ke Profil</button>
     </div>
 
     <div class="footer">
@@ -424,4 +427,4 @@ function backProfile(){ showPage("pageProfile"); }
 </script>
 
 </body>
-</html>
+        </html>
