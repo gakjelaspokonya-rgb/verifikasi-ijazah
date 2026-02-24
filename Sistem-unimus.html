@@ -7,27 +7,28 @@
 
 <style>
 
-/* ================= ROOT WARNA ================= */
+/* ================= ROOT WARNA AKADEMIK ================= */
 :root{
   --biru:#0b3c74;
   --biru2:#082b55;
   --biru3:#123e7a;
   --emas:#c6a54a;
   --emas2:#e5c76b;
-  --bg:#eef2f7;
+  --bg:#eef3f9;
   --card:#ffffff;
   --border:#dbe2ec;
   --text:#1f2937;
   --muted:#6b7280;
-  --grad1:#eef3ff;
-  --grad2:#f8fbff;
+  --grad1:#f4f8ff;
+  --grad2:#eef4ff;
+  --line:#e6eaf1;
 }
 
 /* ================= GLOBAL ================= */
 body{
   margin:0;
   font-family:"Segoe UI",Arial,Helvetica;
-  background:linear-gradient(180deg,#eef2f7,#e9eff7);
+  background:linear-gradient(180deg,#eef3f9,#e8eef7);
   color:var(--text);
 }
 
@@ -45,48 +46,65 @@ body{
 .header-text .u{font-size:15px;opacity:.9;}
 .header-text .n{font-size:24px;font-weight:600;}
 
-/* ================= HALAMAN ================= */
-.page{display:none;padding:45px 60px 80px;}
+/* ================= PAGE ================= */
+.page{
+  display:none;
+  padding:45px 60px 80px;
+}
 .page.active{display:block;}
 
 /* ================= CARD ================= */
 .card{
   background:var(--card);
   border-radius:18px;
-  padding:40px;
-  box-shadow:0 20px 50px rgba(0,0,0,.12);
+  padding:45px;
+  box-shadow:0 20px 55px rgba(0,0,0,.12);
   border-top:6px solid var(--emas);
   position:relative;
   overflow:hidden;
 }
 
-/* ornamen */
+/* ORNAMEN AKADEMIK */
 .card:before{
   content:"";
   position:absolute;
-  right:-60px;
-  top:-60px;
-  width:200px;
-  height:200px;
+  right:-70px;
+  top:-70px;
+  width:260px;
+  height:260px;
   background:radial-gradient(circle,var(--emas2),transparent 70%);
-  opacity:.25;
+  opacity:.18;
 }
 .card:after{
   content:"";
   position:absolute;
-  left:-60px;
-  bottom:-60px;
-  width:200px;
-  height:200px;
+  left:-70px;
+  bottom:-70px;
+  width:260px;
+  height:260px;
   background:radial-gradient(circle,var(--biru3),transparent 70%);
-  opacity:.15;
+  opacity:.12;
 }
 
 /* ================= SEARCH ================= */
-.search-box{max-width:600px;margin:auto;text-align:center;}
-.search-logo{width:140px;margin-bottom:12px;}
-.search-title{font-size:24px;color:var(--biru);font-weight:700;}
-.search-sub{font-size:13px;color:var(--muted);margin-bottom:25px;}
+.search-box{
+  max-width:620px;
+  margin:auto;
+  text-align:center;
+}
+.search-logo{width:150px;margin-bottom:10px;}
+
+.search-title{
+  font-size:24px;
+  color:var(--biru);
+  font-weight:700;
+}
+
+.search-sub{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:28px;
+}
 
 .search-input{
   width:100%;
@@ -98,8 +116,9 @@ body{
   box-shadow:inset 0 2px 4px rgba(0,0,0,.05);
 }
 
+/* ================= BUTTON ================= */
 .btn{
-  padding:12px 22px;
+  padding:12px 24px;
   border-radius:10px;
   border:none;
   cursor:pointer;
@@ -111,12 +130,13 @@ body{
   color:#fff;
 }
 .btn-primary:hover{transform:translateY(-1px);}
+
 .btn-back{
   background:linear-gradient(90deg,#dbeafe,#bfdbfe);
   color:#0b3c74;
 }
 .btn-row{
-  margin-top:20px;
+  margin-top:22px;
   display:flex;
   gap:12px;
   justify-content:center;
@@ -130,42 +150,79 @@ body{
   padding-top:12px;
 }
 
-/* ================= PROFILE ================= */
+/* ================= IDENTITAS HEADER ================= */
 .logo-center{
   text-align:center;
-  margin-bottom:25px;
 }
-.logo-center img{width:150px;}
+.logo-center img{
+  width:150px;
+  margin-bottom:8px;
+}
 
+.instansi{
+  text-align:center;
+  margin-bottom:15px;
+}
+.instansi .nama{
+  font-size:18px;
+  font-weight:700;
+  color:var(--biru);
+}
+.instansi .status{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.divider{
+  height:2px;
+  background:linear-gradient(90deg,var(--emas),transparent);
+  margin:18px 0 28px;
+}
+
+/* ================= PROFILE ================= */
 .profile-top{
   display:flex;
-  gap:30px;
+  gap:32px;
 }
 
 .photo{
-  width:190px;
-  height:240px;
+  width:200px;
+  height:250px;
   border-radius:14px;
   overflow:hidden;
   border:5px solid #e6eaf1;
 }
-.photo img{width:100%;height:100%;object-fit:cover;}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
 .identity-table{flex:1;}
-.identity-table table{width:100%;border-collapse:collapse;}
+.identity-table table{
+  width:100%;
+  border-collapse:collapse;
+}
 .identity-table td{
   border:1px solid var(--border);
   padding:10px 14px;
   font-size:14px;
 }
-.identity-table tr:nth-child(odd){background:#f8fafc;}
+.identity-table tr:nth-child(odd){
+  background:#f8fafc;
+}
 .identity-table td:first-child{
   width:230px;
   font-weight:600;
   color:var(--biru);
 }
 
-.edu{display:flex;gap:8px;flex-wrap:wrap;}
+/* pendidikan */
+.edu{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
 .edu span{
   border:1px solid var(--border);
   padding:5px 10px;
@@ -174,9 +231,9 @@ body{
   background:#fafbff;
 }
 
-/* section */
+/* SECTION */
 .section-title{
-  margin-top:30px;
+  margin-top:32px;
   font-size:19px;
   color:var(--biru);
   font-weight:700;
@@ -186,16 +243,21 @@ body{
 
 .profile-text{
   margin-top:10px;
-  line-height:1.8;
-  font-size:14.5px;
+  line-height:1.85;
+  font-size:14.6px;
   text-align:justify;
 }
 
 /* ================= TASK ================= */
-.task-logo{text-align:center;margin-bottom:20px;}
-.task-logo img{width:140px;}
+.task-logo{
+  text-align:center;
+}
+.task-logo img{width:140px;margin-bottom:8px;}
 
-.task-table table{width:100%;border-collapse:collapse;}
+.task-table table{
+  width:100%;
+  border-collapse:collapse;
+}
 .task-table th{
   background:linear-gradient(90deg,var(--biru),var(--biru2));
   color:#fff;
@@ -207,15 +269,22 @@ body{
   padding:9px;
   font-size:14px;
 }
-.task-table tr:nth-child(even){background:#f6f9ff;}
+.task-table tr:nth-child(even){
+  background:#f6f9ff;
+}
 
+/* SIGN */
 .sign{
   margin-top:40px;
   border-top:2px solid var(--border);
   padding-top:20px;
 }
 .sign-item{margin-bottom:14px;}
-.line{height:1px;background:var(--border);margin:10px 0;}
+.line{
+  height:1px;
+  background:var(--border);
+  margin:10px 0;
+}
 
 .footer{
   margin-top:35px;
@@ -274,6 +343,13 @@ body{
       <img src="logo-unimus.png">
     </div>
 
+    <div class="instansi">
+      <div class="nama">Universitas Muhammadiyah Semarang</div>
+      <div class="status">Profil Dosen Kontrak Sementara</div>
+    </div>
+
+    <div class="divider"></div>
+
     <div class="profile-top">
       <div class="photo">
         <img src="foto-agil.jpg">
@@ -308,15 +384,16 @@ body{
 
     <div class="section-title">Profil Akademik</div>
     <div class="profile-text">
-      Muhammad Agil merupakan dosen kontrak pada Program Studi Manajemen Bisnis dan
-      Sumber Daya Manusia Fakultas Ekonomi dan Bisnis Universitas Muhammadiyah
-      Semarang. Memiliki latar belakang pendidikan multidisiplin pada bidang
+      Muhammad Agil merupakan dosen kontrak pada Program Studi Manajemen Bisnis
+      dan Sumber Daya Manusia Fakultas Ekonomi dan Bisnis Universitas Muhammadiyah
+      Semarang. Memiliki latar belakang pendidikan multidisiplin dalam bidang
       manajemen dan ilmu lingkungan, serta pengalaman akademik dalam pengajaran
-      mata kuliah manajemen organisasi, pemasaran, dan etika bisnis. Selama masa
-      kontrak akademik, yang bersangkutan berperan aktif dalam kegiatan pembelajaran,
-      pengembangan materi ajar, serta pendampingan mahasiswa pada kegiatan akademik
-      dan praktikum. Fokus keilmuan mencakup manajemen sumber daya manusia,
-      perilaku organisasi, dan kewirausahaan berbasis keberlanjutan.
+      mata kuliah manajemen organisasi, pemasaran, perilaku organisasi, dan etika
+      bisnis. Selama masa kontrak akademik, yang bersangkutan aktif dalam kegiatan
+      pembelajaran, penyusunan bahan ajar, pengembangan kurikulum berbasis capaian
+      pembelajaran, serta pendampingan mahasiswa pada kegiatan akademik dan praktikum.
+      Fokus keilmuan mencakup manajemen sumber daya manusia, kewirausahaan
+      berkelanjutan, dan pengembangan organisasi modern.
     </div>
 
     <div class="btn-row" style="justify-content:space-between;margin-top:30px">
@@ -341,6 +418,13 @@ body{
       <img src="logo-unimus.png">
     </div>
 
+    <div class="instansi">
+      <div class="nama">Universitas Muhammadiyah Semarang</div>
+      <div class="status">Penugasan Dosen Kontrak</div>
+    </div>
+
+    <div class="divider"></div>
+
     <div class="section-title">Penugasan Pengajaran</div>
     <p>
       Berdasarkan Surat Tugas Fakultas Ekonomi dan Bisnis Universitas Muhammadiyah
@@ -355,7 +439,6 @@ body{
           <th>No</th><th>Kode</th><th>Mata Kuliah</th>
           <th>Kelas</th><th>SKS</th><th>Hari</th><th>Periode</th>
         </tr>
-
         <tr><td>1</td><td>MNB101</td><td>Pengantar Manajemen</td><td>A</td><td>3</td><td>Senin</td><td>Mar–Jun</td></tr>
         <tr><td>2</td><td>MSDM201</td><td>Manajemen SDM</td><td>B</td><td>3</td><td>Rabu</td><td>Mar–Jun</td></tr>
         <tr><td>3</td><td>MNP301</td><td>Manajemen Pemasaran</td><td>A</td><td>3</td><td>Jumat</td><td>Mar–Jun</td></tr>
@@ -427,4 +510,4 @@ function backProfile(){ showPage("pageProfile"); }
 </script>
 
 </body>
-        </html>
+                                   </html>
