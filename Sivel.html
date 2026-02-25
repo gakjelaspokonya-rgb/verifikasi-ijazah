@@ -3,358 +3,486 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIVIL UNIMUS - Verifikasi Ijazah</title>
+<title>Verifikasi Ijazah Nasional</title>
 
 <style>
+
+/* ===============================
+WARNA NASIONAL
+=============================== */
+
 :root{
 --biru:#0b3c74;
 --biru2:#082b55;
 --emas:#c6a54a;
---bg:#eef3f9;
+--bg:#f4f6fb;
 --card:#ffffff;
---border:#dbe2ec;
+--border:#e3e8f0;
 --text:#1f2937;
 --muted:#6b7280;
 }
 
+
+
+/* ===============================
+BODY
+=============================== */
+
 body{
 margin:0;
-font-family:"Segoe UI",Arial;
-background:linear-gradient(180deg,var(--bg),#e8eef7);
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
 color:var(--text);
 }
 
-/* LOADING */
-#loading{
-position:fixed;inset:0;
-background:white;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:9999;
-opacity:0;
-pointer-events:none;
-transition:.3s;
-}
-#loading.active{opacity:1;pointer-events:auto;}
-#loading img{width:110px;margin-bottom:15px;}
-.spinner{
-width:50px;height:50px;
-border:5px solid #e3e8f0;
-border-top:5px solid var(--biru);
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg);}}
 
-/* HEADER */
+
+/* ===============================
+TRANSISI HALAMAN NASIONAL
+=============================== */
+
+.page{
+opacity:0;
+transform:translateY(20px);
+transition:.4s;
+pointer-events:none;
+position:absolute;
+width:100%;
+}
+
+.page.active{
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+position:relative;
+}
+
+
+
+/* ===============================
+HEADER NASIONAL
+=============================== */
+
 .header{
 background:linear-gradient(90deg,var(--biru),var(--biru2));
-color:white;
-padding:18px 40px;
+color:#fff;
+padding:14px 28px;
 display:flex;
 align-items:center;
-gap:15px;
-border-bottom:5px solid var(--emas);
+gap:14px;
 }
-.header img{width:90px;}
+
+.header img{
+width:46px;
+}
+
 .header-title{
-font-size:20px;
-font-weight:700;
+font-size:16px;
+font-weight:600;
 }
+
 .header-sub{
-font-size:13px;
+font-size:12px;
 opacity:.9;
 }
 
-/* PAGE */
-.page{display:none;padding:40px;}
-.page.active{display:block;}
 
-/* CARD */
+
+/* ===============================
+CONTAINER
+=============================== */
+
+.container{
+max-width:980px;
+margin:40px auto;
+padding:0 20px;
+}
+
+
+
+/* ===============================
+CARD
+=============================== */
+
 .card{
 background:var(--card);
-border-radius:16px;
-padding:35px;
-max-width:850px;
-margin:auto;
-box-shadow:0 20px 50px rgba(0,0,0,.12);
-border-top:6px solid var(--emas);
-position:relative;
-overflow:hidden;
+border-radius:8px;
+padding:28px;
+border:1px solid var(--border);
+box-shadow:0 4px 14px rgba(0,0,0,.06);
 }
 
-.watermark{
-position:absolute;
-inset:0;
-background:url('logo-unimus.png') center/260px no-repeat;
-opacity:.04;
-pointer-events:none;
-}
 
-/* SEARCH */
-.search-title{
-font-size:24px;
+
+/* ===============================
+FORM
+=============================== */
+
+.form-title{
+font-size:18px;
 font-weight:700;
-color:var(--biru);
-text-align:center;
+margin-bottom:6px;
 }
-.search-sub{
-text-align:center;
-font-size:14px;
+
+.form-sub{
+font-size:13px;
 color:var(--muted);
-margin-bottom:25px;
+margin-bottom:20px;
 }
+
 .input{
 width:100%;
-padding:14px;
-border-radius:10px;
+padding:12px;
+border-radius:4px;
 border:1px solid var(--border);
+margin-bottom:14px;
 font-size:14px;
 }
 
 .btn{
-padding:12px 24px;
+background:var(--biru);
+color:#fff;
 border:none;
-border-radius:10px;
+padding:12px 18px;
+border-radius:4px;
 cursor:pointer;
 font-weight:600;
 }
-.btn-primary{
-background:linear-gradient(90deg,var(--biru),var(--biru2));
-color:white;
-}
-.btn-back{
-background:#e0ecff;
-color:var(--biru);
-}
-.btn-row{
-margin-top:22px;
-display:flex;
-gap:12px;
-justify-content:center;
+
+.btn:hover{
+background:var(--biru2);
 }
 
-/* RESULT */
-.title-center{
-text-align:center;
-font-size:20px;
-font-weight:700;
+
+
+/* ===============================
+LOADING NASIONAL
+=============================== */
+
+#loadingPage{
+position:fixed;
+inset:0;
+background:#ffffff;
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
+}
+
+.loader{
+width:42px;
+height:42px;
+border:4px solid #e5e7eb;
+border-top:4px solid var(--biru);
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+.loading-text{
+margin-top:14px;
+font-size:14px;
 color:var(--biru);
-margin-bottom:5px;
+font-weight:600;
 }
-.status-valid{
-text-align:center;
-color:#0f7b33;
+
+
+
+/* ===============================
+RESULT
+=============================== */
+
+.result-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:16px;
+}
+
+.status{
 font-weight:700;
-margin-bottom:20px;
+padding:6px 14px;
+border-radius:20px;
+font-size:13px;
 }
-.data-table table{
+
+.valid{
+background:#e7f7ee;
+color:#15803d;
+}
+
+.invalid{
+background:#fde8e8;
+color:#b91c1c;
+}
+
+.result-table{
 width:100%;
 border-collapse:collapse;
+margin-top:14px;
 }
-.data-table td{
+
+.result-table td{
 border:1px solid var(--border);
 padding:10px;
 font-size:14px;
 }
-.data-table td:first-child{
-width:240px;
+
+.result-table td:first-child{
+width:260px;
+background:#f9fafb;
 font-weight:600;
+}
+
+
+
+/* ===============================
+BACK
+=============================== */
+
+.back-top{
+margin-bottom:10px;
+font-size:13px;
 color:var(--biru);
-background:#f8fafc;
+cursor:pointer;
 }
 
-.qr{
-text-align:center;
-margin-top:20px;
+.back-top:hover{
+text-decoration:underline;
 }
-.qr img{width:120px;}
 
-.sign{
-margin-top:30px;
-border-top:1px solid var(--border);
-padding-top:15px;
-font-size:14px;
-}
+
+
+/* ===============================
+RESPONSIVE
+=============================== */
 
 @media(max-width:768px){
-.page{padding:20px;}
-.card{padding:25px;}
-.header{flex-direction:column;align-items:flex-start;}
+
+.container{
+margin:20px auto;
 }
+
+.result-table td{
+font-size:13px;
+}
+
+.header{
+flex-direction:column;
+align-items:flex-start;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div id="loading">
-<img src="logo-unimus.png">
-<div class="spinner"></div>
-<div style="margin-top:10px;font-weight:600;color:#0b3c74">
-Sistem Verifikasi Ijazah<br>
-Universitas Muhammadiyah Semarang
-</div>
+
+
+<!-- ===============================
+LOADING
+=============================== -->
+
+<div id="loadingPage">
+<img src="logo-kemdikbud.png" width="70">
+<div class="loader"></div>
+<div class="loading-text">Sistem Verifikasi Ijazah Nasional</div>
 </div>
 
-<!-- HEADER -->
+
+
+<!-- ===============================
+HEADER
+=============================== -->
+
 <div class="header">
-<img src="logo-unimus.png">
+<img src="logo-kemdikbud.png">
 <div>
-<div class="header-title">SIVIL UNIMUS</div>
-<div class="header-sub">
-Sistem Verifikasi Ijazah Elektronik<br>
-Universitas Muhammadiyah Semarang
-</div>
+<div class="header-title">Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi</div>
+<div class="header-sub">Sistem Verifikasi Ijazah Nasional</div>
 </div>
 </div>
 
-<!-- SEARCH PAGE -->
-<div id="pageSearch" class="page active">
+
+
+<div class="container">
+
+
+
+<!-- ===============================
+FORM PAGE
+=============================== -->
+
+<section id="formPage" class="page active">
+
 <div class="card">
-<div class="watermark"></div>
 
-<div class="search-title">Verifikasi Keaslian Ijazah</div>
-<div class="search-sub">
-Masukkan Nomor Ijazah atau Nama Lulusan
-</div>
+<div class="form-title">Verifikasi Ijazah</div>
+<div class="form-sub">Masukkan nomor ijazah dan NIM/NISN</div>
 
-<input id="keyword" class="input" placeholder="Nomor Ijazah / Nama">
+<input id="noIjazah" class="input" placeholder="Nomor Ijazah">
+<input id="nim" class="input" placeholder="NIM / NISN">
 
-<div class="btn-row">
-<button class="btn btn-primary" onclick="search()">Verifikasi</button>
-</div>
+<button class="btn" onclick="verifikasi()">Verifikasi</button>
 
 </div>
-</div>
-<!-- RESULT PAGE -->
-<div id="pageResult" class="page">
+
+</section>
+
+
+
+<!-- ===============================
+RESULT PAGE
+=============================== -->
+
+<section id="resultPage" class="page">
+
 <div class="card">
-<div class="watermark"></div>
 
-<div class="title-center">Hasil Verifikasi Ijazah</div>
-<div class="status-valid">VALID ✓ Terdaftar pada Pangkalan Data Pendidikan Tinggi</div>
+<div class="back-top" onclick="kembali()">← Kembali ke Pencarian</div>
 
-<div class="data-table">
-<table>
-<tr><td>Nama</td><td id="r_nama"></td></tr>
-<tr><td>Nomor Ijazah</td><td id="r_no"></td></tr>
-<tr><td>NIK</td><td id="r_nik"></td></tr>
-<tr><td>Tempat, Tanggal Lahir</td><td id="r_ttl"></td></tr>
-<tr><td>Program Studi</td><td id="r_prodi"></td></tr>
-<tr><td>Fakultas</td><td id="r_fakultas"></td></tr>
-<tr><td>Jenjang</td><td id="r_jenjang"></td></tr>
-<tr><td>Tahun Lulus</td><td id="r_lulus"></td></tr>
-<tr><td>Nomor SK Ijazah</td><td id="r_sk"></td></tr>
-<tr><td>Tanggal Ijazah</td><td id="r_tgl"></td></tr>
+<div class="result-header">
+<div style="font-weight:700">Hasil Verifikasi</div>
+<div id="statusBox" class="status">VALID</div>
+</div>
+
+<table class="result-table">
+<tr><td>Nama</td><td id="rNama"></td></tr>
+<tr><td>NIM</td><td id="rNim"></td></tr>
+<tr><td>Perguruan Tinggi</td><td id="rPt"></td></tr>
+<tr><td>Program Studi</td><td id="rProdi"></td></tr>
+<tr><td>Jenjang</td><td id="rJenjang"></td></tr>
+<tr><td>Nomor Ijazah</td><td id="rNo"></td></tr>
+<tr><td>Tahun Lulus</td><td id="rTahun"></td></tr>
+<tr><td>Tanggal Ijazah</td><td id="rTanggal"></td></tr>
 </table>
-</div>
-
-<div class="qr">
-<img src="qr.png">
-<div style="font-size:12px;color:#6b7280">
-Scan untuk verifikasi online
-</div>
-</div>
-
-<div class="sign">
-<div><b>Pejabat Penandatangan</b></div>
-<div>Rektor Universitas Muhammadiyah Semarang</div>
-<br>
-<div style="font-weight:700">
-Prof. Dr. H. Masrukhi, M.Pd.
-</div>
-<div>NIP. 196804041993031002</div>
-</div>
-
-<div class="btn-row">
-<button class="btn btn-back" onclick="back()">Kembali</button>
-</div>
 
 </div>
+
+</section>
+
+
+
 </div>
+
+
 
 <script>
-/* DATABASE IJAZAH */
-const db = [
+
+/* ===============================
+DATABASE IJAZAH
+=============================== */
+
+
+const ijazahDB=[
+
 {
-nama:"Ahmad Fauzan",
-no:"UNM-2020-000123",
-nik:"3374010101990001",
-ttl:"Semarang, 01 Januari 1999",
-prodi:"S1 Teknik Informatika",
-fakultas:"Fakultas Teknik",
-jenjang:"Sarjana",
-lulus:"2020",
-sk:"123/SK/FT/2020",
-tgl:"20 Agustus 2020"
+no:"UNIMUS-2024-001",
+nim:"B21121001",
+nama:"Muhammad Agil",
+pt:"Universitas Muhammadiyah Semarang",
+prodi:"Manajemen",
+jenjang:"S1",
+tahun:"2024",
+tanggal:"12 Agustus 2024"
 },
+
+
 {
-nama:"Siti Rahmawati",
-no:"UNM-2021-000456",
-nik:"3374010202990002",
-ttl:"Kendal, 02 Februari 1999",
-prodi:"S1 Keperawatan",
-fakultas:"Fakultas Ilmu Keperawatan",
-jenjang:"Sarjana",
-lulus:"2021",
-sk:"456/SK/FIK/2021",
-tgl:"18 September 2021"
+no:"UNIMUS-2023-188",
+nim:"B20192033",
+nama:"Ahmad Syafii Ma'arif",
+pt:"Universitas Muhammadiyah Semarang",
+prodi:"Manajemen",
+jenjang:"S1",
+tahun:"2023",
+tanggal:"10 September 2023"
 }
+
+
 ];
 
-/* SEARCH */
-function search(){
-let key=document.getElementById("keyword").value.toLowerCase();
-if(!key)return;
 
-showLoading();
 
-setTimeout(()=>{
-let d=db.find(x=>
-x.no.toLowerCase()===key ||
-x.nama.toLowerCase()===key
-);
+/* ===============================
+PAGE CONTROL
+=============================== */
 
-if(!d){
-alert("Data ijazah tidak ditemukan");
-hideLoading();
+function showPage(id){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+}
+
+
+
+/* ===============================
+VERIFIKASI
+=============================== */
+
+function verifikasi(){
+
+const no=document.getElementById("noIjazah").value.trim();
+const nim=document.getElementById("nim").value.trim();
+
+if(!no||!nim){
+alert("Isi nomor ijazah dan NIM");
 return;
 }
 
-document.getElementById("r_nama").innerText=d.nama;
-document.getElementById("r_no").innerText=d.no;
-document.getElementById("r_nik").innerText=d.nik;
-document.getElementById("r_ttl").innerText=d.ttl;
-document.getElementById("r_prodi").innerText=d.prodi;
-document.getElementById("r_fakultas").innerText=d.fakultas;
-document.getElementById("r_jenjang").innerText=d.jenjang;
-document.getElementById("r_lulus").innerText=d.lulus;
-document.getElementById("r_sk").innerText=d.sk;
-document.getElementById("r_tgl").innerText=d.tgl;
+document.getElementById("loadingPage").style.display="flex";
 
-document.getElementById("pageSearch").classList.remove("active");
-document.getElementById("pageResult").classList.add("active");
+setTimeout(()=>{
 
-hideLoading();
+const data=ijazahDB.find(d=>d.no===no&&d.nim===nim);
+
+document.getElementById("loadingPage").style.display="none";
+
+showPage("resultPage");
+
+if(!data){
+
+document.getElementById("statusBox").className="status invalid";
+document.getElementById("statusBox").innerText="TIDAK VALID";
+return;
+}
+
+document.getElementById("statusBox").className="status valid";
+document.getElementById("statusBox").innerText="VALID";
+
+document.getElementById("rNama").innerText=data.nama;
+document.getElementById("rNim").innerText=data.nim;
+document.getElementById("rPt").innerText=data.pt;
+document.getElementById("rProdi").innerText=data.prodi;
+document.getElementById("rJenjang").innerText=data.jenjang;
+document.getElementById("rNo").innerText=data.no;
+document.getElementById("rTahun").innerText=data.tahun;
+document.getElementById("rTanggal").innerText=data.tanggal;
+
 },1000);
+
 }
 
-/* BACK */
-function back(){
-document.getElementById("pageResult").classList.remove("active");
-document.getElementById("pageSearch").classList.add("active");
+
+
+/* ===============================
+KEMBALI
+=============================== */
+
+function kembali(){
+showPage("formPage");
 }
 
-/* LOADING */
-function showLoading(){
-document.getElementById("loading").classList.add("active");
-}
-function hideLoading(){
-document.getElementById("loading").classList.remove("active");
-}
 </script>
 
 </body>
