@@ -37,7 +37,6 @@ body{
   align-items:center;
   gap:18px;
   border-bottom:5px solid var(--emas);
-  position:relative;
 }
 
 .header img{width:100px;}
@@ -157,10 +156,47 @@ border-top:1px solid var(--border);padding-top:12px;}
 .sign-item{margin-bottom:14px;}
 .line{height:1px;background:var(--border);margin:12px 0;}
 
+/* ================= LOADING ================= */
+.loading{
+position:fixed;
+inset:0;
+background:rgba(255,255,255,.85);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+opacity:0;
+pointer-events:none;
+transition:.3s;
+}
+.loading.active{opacity:1;pointer-events:auto;}
+
+.spinner{
+width:42px;height:42px;
+border:4px solid #e5e7eb;
+border-top:4px solid var(--biru);
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+.page{padding:20px;}
+.profile-top{flex-direction:column;align-items:center;}
+.photo{width:180px;height:230px;}
+.header{flex-direction:column;align-items:flex-start;}
+.header img{width:80px;}
+}
+
 </style>
 </head>
 
 <body>
+
+<div id="loading" class="loading">
+<div class="spinner"></div>
+</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -185,7 +221,6 @@ Telp (024) 76740296 • www.unimus.ac.id
 <div class="watermark-unimus"></div>
 
 <img src="logo-unimus.png" class="search-logo">
-
 <div class="search-title">Sistem Informasi Dosen Kontrak</div>
 <div class="search-sub">Pencarian berdasarkan Nama / NIDK</div>
 
@@ -269,40 +304,31 @@ Biro Administrasi Akademik<br>
 
 <div class="section-title">Penugasan Pengajaran</div>
 <div class="profile-text">
-Berdasarkan Surat Keputusan Dekan Fakultas, dosen kontrak melaksanakan
-pengajaran semester berjalan dengan beban minimal 10 SKS.
+Berdasarkan SK Dekan Fakultas terkait, dosen kontrak melaksanakan pengajaran semester berjalan dengan beban 10–11 SKS.
 </div>
 
 <div class="task-table">
-<table>
-<tr>
-<th>No</th>
-<th>Kode</th>
-<th>Mata Kuliah</th>
-<th>SKS</th>
-</tr>
-<tr><td>1</td><td>MNB101</td><td>Pengantar Manajemen</td><td>2</td></tr>
-<tr><td>2</td><td>MSDM201</td><td>Manajemen SDM</td><td>2</td></tr>
-<tr><td>3</td><td>MNP301</td><td>Manajemen Pemasaran</td><td>2</td></tr>
-<tr><td>4</td><td>MNB210</td><td>Perilaku Organisasi</td><td>2</td></tr>
-<tr><td>5</td><td>MNB220</td><td>Etika Bisnis</td><td>2</td></tr>
+<table id="taskBody">
 </table>
 </div>
 
 <div class="sign">
 <div class="sign-item">
 <b>Rektor</b><br>
-Prof. Dr. H. Masrukhi, M.Pd.
+Prof. Dr. H. Masrukhi, M.Pd.<br>
+NIP 196805041993031002
 </div>
 <div class="line"></div>
 <div class="sign-item">
 <b>Dekan Fakultas</b><br>
-Dr. H. Sutrisno, S.E., M.Si.
+Dr. H. Sutrisno, S.E., M.Si.<br>
+NIP 197201152000121001
 </div>
 <div class="line"></div>
 <div class="sign-item">
-<b>Dosen</b><br>
-<span id="ttdNama"></span>
+<b>Dosen Terkait</b><br>
+<span id="ttdNama"></span><br>
+NIDK <span id="ttdNidk"></span>
 </div>
 </div>
 
@@ -314,7 +340,7 @@ Dr. H. Sutrisno, S.E., M.Si.
 
 <script>
 
-/* DATABASE DOSEN */
+/* ================= DATABASE ================= */
 const dosenDB={
 "agil":{
 nama:"Muhammad Agil, S.M., M.M., M.Ling.",
@@ -326,121 +352,50 @@ fak:"Fakultas Ekonomi dan Bisnis",
 email:"agil@unimus.ac.id",
 s1:"S1 Manajemen — Universitas Diponegoro",
 s2:"S2 Manajemen — Universitas Diponegoro; S2 Ilmu Lingkungan — Universitas Terbuka",
-profil:"Dosen kontrak bidang manajemen SDM dan organisasi.",
-latar:"Memiliki latar multidisiplin manajemen dan lingkungan dengan fokus SDM dan organisasi.",
-foto:"foto-agil.jpg"
-},
-
-"syafii":{
-nama:"Ahmad Syafii Ma'arif, S.M., M.M.",
-nidk:"01261627120",
-ttl:"Pekalongan, 5 Mei 1988",
-jk:"Laki-laki",
-prodi:"Manajemen",
-fak:"Fakultas Ekonomi dan Bisnis",
-email:"syafii@unimus.ac.id",
-s1:"S1 Manajemen — Universitas Negeri Semarang",
-s2:"S2 Manajemen — Universitas Diponegoro",
-profil:"Dosen manajemen strategik.",
-latar:"Fokus kewirausahaan dan strategi bisnis.",
-foto:"foto-default.jpg"
-},
-
-"dwi":{
-nama:"Dwi Agustina, S.E., M.M.",
-nidk:"01261627121",
-ttl:"Semarang, 3 Maret 1992",
-jk:"Perempuan",
-prodi:"Manajemen",
-fak:"Fakultas Ekonomi dan Bisnis",
-email:"dwi@unimus.ac.id",
-s1:"S1 Ekonomi — Universitas Negeri Semarang",
-s2:"S2 Manajemen — Universitas Diponegoro",
-profil:"Dosen keuangan dan pemasaran.",
-latar:"Kompetensi analisis keuangan dan perilaku konsumen.",
-foto:"foto-default.jpg"
-},
-
-"ning":{
-nama:"Ningtiyas Anggraini Putri, S.H., M.H.",
-nidk:"01261627122",
-ttl:"Kudus, 10 Oktober 1991",
-jk:"Perempuan",
-prodi:"Ilmu Hukum",
-fak:"Fakultas Hukum",
-email:"ning@unimus.ac.id",
-s1:"S1 Hukum — Universitas Islam Indonesia",
-s2:"S2 Hukum — Universitas Diponegoro",
-profil:"Dosen hukum bisnis.",
-latar:"Spesialis hukum kontrak dan bisnis.",
-foto:"foto-default.jpg"
-},
-
-"ayu":{
-nama:"Ayuningsih Dwita Sari, S.Kom., M.Kom.",
-nidk:"01261627123",
-ttl:"Semarang, 8 Agustus 1993",
-jk:"Perempuan",
-prodi:"Informatika",
-fak:"Fakultas Teknologi Informasi",
-email:"ayu@unimus.ac.id",
-s1:"S1 Informatika — Universitas Dian Nuswantoro",
-s2:"S2 Informatika — Universitas Diponegoro",
-profil:"Dosen sistem informasi.",
-latar:"Fokus basis data dan sistem akademik.",
-foto:"foto-default.jpg"
-},
-
-"renaldi":{
-nama:"Renaldi Hutasoit, S.Pd., M.Pd.",
-nidk:"01261627124",
-ttl:"Medan, 1 Januari 1990",
-jk:"Laki-laki",
-prodi:"Pendidikan",
-fak:"Fakultas FKIP",
-email:"renaldi@unimus.ac.id",
-s1:"S1 Pendidikan — Universitas Negeri Medan",
-s2:"S2 Pendidikan — Universitas Negeri Yogyakarta",
-profil:"Dosen metode pembelajaran.",
-latar:"Fokus evaluasi dan kurikulum.",
-foto:"foto-default.jpg"
-},
-
-"mahmud":{
-nama:"Mahmud Yunus, S.Pd., Gr., M.Pd.",
-nidk:"01261627125",
-ttl:"Demak, 4 April 1989",
-jk:"Laki-laki",
-prodi:"Pendidikan Bahasa",
-fak:"Fakultas FKIP",
-email:"mahmud@unimus.ac.id",
-s1:"S1 Pendidikan Bahasa — Universitas Negeri Semarang",
-s2:"S2 Pendidikan Bahasa — Universitas Negeri Yogyakarta",
-profil:"Dosen linguistik.",
-latar:"Fokus pengajaran bahasa.",
-foto:"foto-default.jpg"
+profil:"Dosen kontrak bidang Manajemen SDM dan Perilaku Organisasi di Fakultas Ekonomi dan Bisnis Universitas Muhammadiyah Semarang. Aktif dalam pengajaran, pengembangan kurikulum, dan pembinaan mahasiswa.",
+latar:"Memiliki latar belakang multidisiplin pada bidang Manajemen dan Ilmu Lingkungan. Fokus kajian meliputi manajemen sumber daya manusia, organisasi, dan keberlanjutan. Berpengalaman dalam kegiatan akademik, penelitian terapan, serta pengabdian masyarakat berbasis manajemen.",
+foto:"foto-agil.jpg",
+task:[
+["1","MNB101","Pengantar Manajemen","A","2","Senin","Mar–Jun"],
+["2","MSDM201","Manajemen SDM","B","2","Selasa","Mar–Jun"],
+["3","MNP301","Manajemen Pemasaran","A","2","Rabu","Mar–Jun"],
+["4","MNB210","Perilaku Organisasi","C","2","Kamis","Mar–Jun"],
+["5","MNB220","Etika Bisnis","A","2","Jumat","Mar–Jun"]
+]
 }
 };
 
 let currentDosen=null;
 
-/* SEARCH */
+/* ================= LOADING ================= */
+function showLoading(){
+document.getElementById("loading").classList.add("active");
+}
+function hideLoading(){
+document.getElementById("loading").classList.remove("active");
+}
+
+/* ================= SEARCH ================= */
 function search(){
 let k=document.getElementById("keyword").value.toLowerCase().trim();
 if(!k){alert("Masukkan keyword");return;}
 
 for(let key in dosenDB){
 let d=dosenDB[key];
-if(d.nama.toLowerCase().includes(k)||d.nidk.includes(k)){
-showProfile(d);
+let text=(d.nama+d.nidk+d.prodi+d.fak+d.email+d.s1+d.s2+d.ttl).toLowerCase();
+if(text.includes(k)){
+showLoading();
+setTimeout(()=>showProfile(d),500);
 return;
-}
-}
+}}
 alert("Data dosen tidak ditemukan");
 }
 
+/* ================= SHOW PROFILE ================= */
 function showProfile(d){
 currentDosen=d;
+hideLoading();
+
 document.getElementById("pageSearch").classList.remove("active");
 document.getElementById("pageProfile").classList.add("active");
 
@@ -457,18 +412,52 @@ document.getElementById("s2").innerText=d.s2;
 document.getElementById("profil").innerText=d.profil;
 document.getElementById("latar").innerText=d.latar;
 document.getElementById("ttdNama").innerText=d.nama;
+document.getElementById("ttdNidk").innerText=d.nidk;
 }
 
+/* ================= TASK ================= */
 function openTask(){
+if(!currentDosen)return;
+
+showLoading();
+
+setTimeout(()=>{
+hideLoading();
+
 document.getElementById("pageProfile").classList.remove("active");
 document.getElementById("pageTask").classList.add("active");
+
+let html=`
+<tr>
+<th>No</th>
+<th>Kode</th>
+<th>Mata Kuliah</th>
+<th>Kelas</th>
+<th>SKS</th>
+<th>Hari</th>
+<th>Periode</th>
+</tr>`;
+currentDosen.task.forEach(r=>{
+html+=`<tr>
+<td>${r[0]}</td>
+<td>${r[1]}</td>
+<td>${r[2]}</td>
+<td>${r[3]}</td>
+<td>${r[4]}</td>
+<td>${r[5]}</td>
+<td>${r[6]}</td>
+</tr>`;
+});
+document.getElementById("taskBody").innerHTML=html;
+
+},500);
 }
 
+/* ================= NAV ================= */
 function backSearch(){
 document.getElementById("pageProfile").classList.remove("active");
 document.getElementById("pageSearch").classList.add("active");
 }
-
 function backProfile(){
 document.getElementById("pageTask").classList.remove("active");
 document.getElementById("pageProfile").classList.add("active");
@@ -477,4 +466,4 @@ document.getElementById("pageProfile").classList.add("active");
 </script>
 
 </body>
-  </html>
+</html>
