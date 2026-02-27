@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pangkalan Data Pendidikan Tinggi</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ====== ROOT PDDIKTI COLOR ====== */
+/* ================= ROOT ================= */
 :root{
---p1:#5b2be0;
---p2:#8a2be2;
---p3:#a855f7;
+--ungu1:#6a11cb;
+--ungu2:#8e2de2;
+--ungu3:#a044ff;
 --bg:#f3f4f6;
 --card:#ffffff;
 --text:#1f2937;
@@ -22,19 +23,19 @@
 
 body{
 margin:0;
-font-family:"Inter",sans-serif;
+font-family:"Poppins",sans-serif;
 background:var(--bg);
 color:var(--text);
 }
 
-/* ===== NAVBAR ===== */
+/* ================= NAVBAR ================= */
 .navbar{
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:14px 32px;
+padding:14px 40px;
 background:#fff;
-box-shadow:0 2px 8px rgba(0,0,0,.05);
+box-shadow:0 2px 10px rgba(0,0,0,.05);
 }
 
 .logo{
@@ -48,150 +49,62 @@ font-weight:600;
 
 .nav-links{
 display:flex;
-gap:26px;
+gap:28px;
 font-size:14px;
 color:#555;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero{
-background:linear-gradient(135deg,#6a11cb,#8e2de2,#a855f7);
-padding:60px 30px 110px;
+background:linear-gradient(135deg,var(--ungu1),var(--ungu2));
+padding:60px 40px 90px;
 color:white;
-position:relative;
-overflow:hidden;
 }
 
-.hero::after{
-content:"";
-position:absolute;
-right:-80px;
-top:-60px;
-width:260px;
-height:260px;
-background:rgba(255,255,255,.08);
-border-radius:50%;
-}
+.hero h1{margin:0;font-size:32px}
+.hero p{opacity:.9}
 
-.hero h1{
-margin:0;
-font-size:34px;
-font-weight:700;
-}
-
-.hero p{
-margin-top:8px;
-opacity:.9;
-}
-
-/* ===== SEARCH SIVIL STYLE ===== */
-.search-area{
-margin-top:26px;
+/* SEARCH */
+.search-wrap{
+margin-top:30px;
 display:flex;
 justify-content:center;
 }
 
 .search-box{
-display:flex;
-background:#fff;
+background:white;
 border-radius:16px;
-box-shadow:0 10px 28px rgba(0,0,0,.15);
-overflow:hidden;
-width:760px;
-max-width:95%;
+padding:8px;
+display:flex;
+width:720px;
+box-shadow:0 8px 30px rgba(0,0,0,.15);
 }
 
 .search-box select{
 border:none;
-padding:14px;
+padding:12px;
 border-right:1px solid #eee;
-font-size:14px;
 outline:none;
 }
 
 .search-box input{
 flex:1;
 border:none;
-padding:14px;
-font-size:14px;
+padding:12px;
 outline:none;
 }
 
 .search-btn{
-background:linear-gradient(135deg,#6a11cb,#a855f7);
+background:linear-gradient(135deg,var(--ungu1),var(--ungu3));
 border:none;
 color:white;
-padding:0 24px;
+padding:0 22px;
+border-radius:12px;
 cursor:pointer;
-font-size:18px;
 }
 
-/* ===== RESULT AREA ===== */
-.result{
-margin:40px auto;
-max-width:760px;
-display:none;
-}
-
-.card{
-background:white;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,.08);
-padding:22px;
-}
-
-/* ===== LOADING ===== */
-.loading{
-text-align:center;
-padding:30px;
-display:none;
-}
-
-.spinner{
-width:36px;
-height:36px;
-border:4px solid #eee;
-border-top:4px solid #8e2de2;
-border-radius:50%;
-margin:auto;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-to{transform:rotate(360deg)}
-}
-
-/* ===== STATUS ===== */
-.status{
-text-align:center;
-font-weight:600;
-margin-bottom:14px;
-}
-
-.ok{color:#16a34a}
-.no{color:#dc2626}
-
-/* ===== DATA TABLE ===== */
-.table{
-width:100%;
-border-collapse:collapse;
-}
-
-.table td{
-padding:10px 6px;
-border-bottom:1px solid #eee;
-font-size:14px;
-}
-
-.label{
-color:#6b7280;
-width:160px;
-}
-
-/* ===== MENU GRID ===== */
-.section{
-padding:40px 30px;
-}
+/* ================= GRID ================= */
+.section{padding:30px 40px}
 
 .grid{
 display:grid;
@@ -199,29 +112,103 @@ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 }
 
-.menu{
+.card{
 background:white;
-border-radius:18px;
-padding:24px;
-text-align:center;
+border-radius:16px;
+padding:22px;
 box-shadow:0 6px 18px rgba(0,0,0,.08);
+cursor:pointer;
+transition:.2s;
 }
 
-.menu-icon{
-font-size:30px;
-margin-bottom:10px;
+.card:hover{transform:translateY(-4px)}
+
+.card-icon{font-size:28px;margin-bottom:8px}
+.card-title{font-weight:600}
+.card-sub{font-size:13px;color:#6b7280}
+
+/* ================= STAT ================= */
+.stat-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
 }
 
-.menu-title{
+.stat{
+color:white;
+padding:24px;
+border-radius:16px;
 font-weight:600;
 }
 
-/* ===== FOOTER ===== */
+.s1{background:linear-gradient(135deg,#36d1dc,#5b86e5)}
+.s2{background:linear-gradient(135deg,#f7971e,#ffd200)}
+.s3{background:linear-gradient(135deg,#00c9ff,#92fe9d)}
+.s4{background:linear-gradient(135deg,#f953c6,#b91d73)}
+
+/* ================= BIODATA ================= */
+.biodata-wrap{
+padding:30px 40px;
+}
+
+.biodata-title{
+background:linear-gradient(135deg,var(--ungu1),var(--ungu2));
+color:white;
+padding:18px 24px;
+border-radius:14px;
+font-size:22px;
+font-weight:600;
+}
+
+.biodata-card{
+margin-top:20px;
+background:white;
+border-radius:16px;
+padding:24px;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.bio-label{color:var(--muted);font-size:13px}
+.bio-value{font-weight:600}
+
+/* ================= NOT FOUND ================= */
+.notfound{
+margin-top:20px;
+background:white;
+border-radius:16px;
+padding:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+}
+
+.notfound-text{
+font-size:22px;
+color:#a044ff;
+font-weight:600;
+}
+
+.btn{
+margin-top:10px;
+display:inline-block;
+padding:8px 14px;
+border-radius:8px;
+background:linear-gradient(135deg,var(--ungu1),var(--ungu3));
+color:white;
+cursor:pointer;
+}
+
+/* ================= FOOTER ================= */
 .footer{
 margin-top:40px;
-background:linear-gradient(135deg,#6a11cb,#8e2de2);
+background:linear-gradient(135deg,var(--ungu1),var(--ungu2));
 color:white;
-padding:40px 30px;
+padding:40px;
 display:flex;
 justify-content:space-between;
 flex-wrap:wrap;
@@ -230,11 +217,22 @@ gap:20px;
 
 .footer img{width:60px}
 
-/* ===== MOBILE ===== */
+/* ================= MOBILE ================= */
 @media(max-width:768px){
-.navbar{flex-direction:column;align-items:flex-start;gap:10px}
-.hero{padding:40px 20px 80px}
+
+.search-box{width:100%}
 .section{padding:20px}
+.hero{padding:40px 20px 70px}
+
+.biodata-card{
+grid-template-columns:1fr;
+}
+
+.notfound{
+flex-direction:column;
+text-align:center;
+}
+
 }
 
 </style>
@@ -242,10 +240,10 @@ gap:20px;
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <div class="navbar">
 <div class="logo">
-<img src="logo-dikti.png">
+<img src="https://pddikti.kemdikbud.go.id/assets/logo.png">
 <span>Pangkalan Data Pendidikan Tinggi</span>
 </div>
 
@@ -257,107 +255,123 @@ gap:20px;
 </div>
 </div>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <div class="hero">
 <h1>Jangan Lewatkan!</h1>
 <p>Update Pelaporan PDDikti</p>
 
-<div class="search-area">
+<div class="search-wrap">
 <div class="search-box">
 <select>
-<option>Semua</option>
 <option>Mahasiswa</option>
-<option>Ijazah</option>
 </select>
 
-<input id="keyword" placeholder="Kata kunci: [Nama] [NIM] [NIK]">
+<input id="keyword" placeholder="Kata kunci: Nama / NIM">
+
 <button class="search-btn" onclick="cari()">🔍</button>
 </div>
 </div>
 </div>
 
-<!-- LOADING -->
-<div class="loading" id="loading">
-<div class="spinner"></div>
-<div style="margin-top:10px">Memuat data PDDikti...</div>
-</div>
-
-<!-- RESULT -->
-<div class="result" id="result">
-<div class="card" id="cardHasil"></div>
-</div>
-
-<!-- MENU -->
+<!-- ================= MENU ================= -->
 <div class="section">
 <div class="grid">
 
-<div class="menu"><div class="menu-icon">🎓</div><div class="menu-title">Program Studi</div></div>
-<div class="menu"><div class="menu-icon">🏫</div><div class="menu-title">Perguruan Tinggi</div></div>
-<div class="menu"><div class="menu-icon">📊</div><div class="menu-title">Statistik</div></div>
-<div class="menu"><div class="menu-icon">📚</div><div class="menu-title">Publikasi</div></div>
-<div class="menu"><div class="menu-icon">📢</div><div class="menu-title">Pengumuman</div></div>
-<div class="menu"><div class="menu-icon">🗺️</div><div class="menu-title">Peta</div></div>
+<div class="card"><div class="card-icon">🎓</div><div class="card-title">Program Studi</div></div>
+<div class="card"><div class="card-icon">🏫</div><div class="card-title">Perguruan Tinggi</div></div>
+<div class="card"><div class="card-icon">📊</div><div class="card-title">Statistik</div></div>
+<div class="card"><div class="card-icon">📚</div><div class="card-title">Publikasi</div></div>
+<div class="card"><div class="card-icon">📢</div><div class="card-title">Pengumuman</div></div>
+<div class="card"><div class="card-icon">🗺️</div><div class="card-title">Peta</div></div>
 
 </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ================= HASIL ================= -->
+<div id="hasil"></div>
+
+<!-- ================= FOOTER ================= -->
 <div class="footer">
 <div>
-<img src="logo-dikti.png"><br>
+<img src="https://pddikti.kemdikbud.go.id/assets/logo.png"><br>
 Pusat Data dan Teknologi Informasi<br>
 Kementerian Pendidikan Tinggi, Sains, dan Teknologi<br>
-Jl. Jenderal Sudirman, Senayan, Jakarta
+Jakarta
 </div>
 
-<div>Ikuti Kami<br>🌐 𝕏 📷 ▶️</div>
+<div>
+Ikuti Kami<br><br>
+🌐 𝕏 📷 ▶️
+</div>
 </div>
 
 <script>
 
-/* ===== DATABASE MAHASISWA ===== */
-const db = [
+/* ================= DATABASE ================= */
+const mahasiswaDB=[
 {
-nama:"Ahmad Fauzan",
-nim:"2020123456",
-pt:"Universitas Muhammadiyah Semarang",
+nama:"MUHAMMAD AGIL",
+jk:"Laki-laki",
+nim:"041601229",
+pt:"Universitas Terbuka",
 prodi:"Manajemen",
-status:"Aktif"
+masuk:"5 Agustus 2019",
+status_awal:"Peserta didik baru",
+status_akhir:"Lulus 2023/2024 Genap"
 }
 ];
 
-/* ===== SEARCH FUNCTION ===== */
+/* ================= SEARCH ================= */
 function cari(){
 const key=document.getElementById("keyword").value.toLowerCase();
-document.getElementById("result").style.display="none";
-document.getElementById("loading").style.display="block";
+const hasil=document.getElementById("hasil");
 
-setTimeout(()=>{
+const data=mahasiswaDB.find(m=>m.nama.toLowerCase().includes(key)||m.nim.includes(key));
 
-document.getElementById("loading").style.display="none";
-document.getElementById("result").style.display="block";
+if(data){
+hasil.innerHTML=`
+<div class="biodata-wrap">
+<div class="biodata-title">Biodata Mahasiswa</div>
 
-let mhs=db.find(d=>d.nama.toLowerCase().includes(key)||d.nim.includes(key));
+<div class="biodata-card">
 
-if(mhs){
-document.getElementById("cardHasil").innerHTML=`
-<div class="status ok">Data ditemukan</div>
+<div><div class="bio-label">Nama</div><div class="bio-value">${data.nama}</div></div>
+<div><div class="bio-label">Perguruan Tinggi</div><div class="bio-value">${data.pt}</div></div>
 
-<table class="table">
-<tr><td class="label">Nama</td><td>${mhs.nama}</td></tr>
-<tr><td class="label">NIM</td><td>${mhs.nim}</td></tr>
-<tr><td class="label">Perguruan Tinggi</td><td>${mhs.pt}</td></tr>
-<tr><td class="label">Program Studi</td><td>${mhs.prodi}</td></tr>
-<tr><td class="label">Status</td><td>${mhs.status}</td></tr>
-</table>
+<div><div class="bio-label">Jenis Kelamin</div><div class="bio-value">${data.jk}</div></div>
+<div><div class="bio-label">Tanggal Masuk</div><div class="bio-value">${data.masuk}</div></div>
+
+<div><div class="bio-label">NIM</div><div class="bio-value">${data.nim}</div></div>
+<div><div class="bio-label">Program Studi</div><div class="bio-value">${data.prodi}</div></div>
+
+<div><div class="bio-label">Status Awal</div><div class="bio-value">${data.status_awal}</div></div>
+<div><div class="bio-label">Status Akhir</div><div class="bio-value">${data.status_akhir}</div></div>
+
+</div>
+</div>
 `;
 }else{
-document.getElementById("cardHasil").innerHTML=`
-<div class="status no">Data tidak ditemukan</div>
+hasil.innerHTML=`
+<div class="biodata-wrap">
+<div class="biodata-title">Hasil Pencarian</div>
+
+<div class="notfound">
+<div>
+<div class="notfound-text">Tidak ada hasil pencarian</div>
+<div>Silakan cari kata kunci lain</div>
+<div class="btn" onclick="resetCari()">Kembali</div>
+</div>
+
+<img src="https://cdn-icons-png.flaticon.com/512/7486/7486800.png" width="160">
+</div>
+</div>
 `;
 }
+}
 
-},1000);
+function resetCari(){
+document.getElementById("hasil").innerHTML="";
+document.getElementById("keyword").value="";
 }
 
 </script>
