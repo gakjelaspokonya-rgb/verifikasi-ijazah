@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Verifikasi Syahadah Nasional</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e40af;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Nasional */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Form Pencarian */
+        .search-container {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30,58,138,0.1);
+            transform: translateY(-2px);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, var(--success), #059669);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, var(--danger), #dc2626);
+            color: white;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Halaman Hasil */
+        .result-page {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .identity-card {
+            background: linear-gradient(135deg, white 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(20px);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .status-valid { background: rgba(16,185,129,0.1); color: var(--success); border: 2px solid var(--success); }
+        .status-invalid { background: rgba(239,68,68,0.1); color: var(--danger); border: 2px solid var(--danger); }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .signature {
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 30px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .back-btn {
+            display: block;
+            margin: 40px auto 0;
+            max-width: 250px;
+        }
+
+        /* Not Found */
+        .not-found {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .search-container, .identity-card { padding: 25px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .logo { font-size: 2rem; }
+        }
+
+        /* Keywords Elegan */
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .keyword-tag {
+            padding: 8px 16px;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .keyword-tag:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-mosque"></i> SYAHADAH NASIONAL
+            </div>
+            <div class="tagline">
+                Sistem Verifikasi Digital Sertifikat Syahadah - Kementerian Agama RI
+            </div>
+        </div>
+
+        <!-- Halaman Pencarian -->
+        <div id="searchPage">
+            <div class="search-container">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--dark);">
+                    <i class="fas fa-search"></i> Verifikasi Syahadah
+                </h2>
+                
+                <div class="search-input-group">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" 
+                           placeholder="Masukkan Nomor Syahadah / Nama Lengkap / Nomor Registrasi"
+                           autocomplete="off">
+                </div>
+
+                <div class="keywords">
+                    <div class="keyword-tag" onclick="setKeyword('SHD2026001')">SHD2026001</div>
+                    <div class="keyword-tag" onclick="setKeyword('SHD2026002')">SHD2026002</div>
+                    <div class="keyword-tag" onclick="setKeyword('MUHAMMAD ALI')">MUHAMMAD ALI</div>
+                    <div class="keyword-tag" onclick="setKeyword('REG-NSY-001')">REG-NSY-001</div>
+                    <div class="keyword-tag" onclick="setKeyword('AHMAD SYAHADAH')">AHMAD SYAHADAH</div>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%; margin-top: 25px;" onclick="verifySyahadah()">
+                    <i class="fas fa-check-circle"></i>
+                    Verifikasi Data Syahadah
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <h3>Memverifikasi data...</h3>
+            <p>Mohon tunggu, sistem sedang memproses permintaan Anda</p>
+        </div>
+
+        <!-- Hasil Ditemukan -->
+        <div id="resultPage" class="result-page">
+            <div class="identity-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-certificate"></i> Sertifikat Syahadah</h2>
+                    <div id="statusBadge" class="status-badge status-valid">
+                        <i class="fas fa-check-circle"></i> TERDAFTAR &amp; VALID
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Nomor Syahadah</div>
+                        <div id="noSyahadah" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Nomor Registrasi</div>
+                        <div id="noRegistrasi" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Nama Lengkap</div>
+                        <div id="namaLengkap" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Tempat, Tanggal Lahir</div>
+                        <div id="ttl" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Alamat Lengkap</div>
+                        <div id="alamat" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Kategori Syahadah</div>
+                        <div id="kategori" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Penguji</div>
+                        <div id="penguji" class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Diterbitkan</div>
+                        <div id="diterbitkan" class="info-value">-</div>
+                    </div>
+                </div>
+
+                <div class="signature">
+                    <div style="font-size: 0.9rem; margin-bottom: 10px;">
+                        Disahkan Secara Elektronik oleh Kementerian Agama RI
+                    </div>
+                    <div style="font-weight: 600; color: var(--primary);">Direktur Pendidikan Islam</div>
+                    <div>Dr. H. Muhammad Syarif, M.Ag</div>
+                    <div style="font-size: 0.8rem; margin-top: 15px;">Tanda Tangan Digital - Berlaku Nasional</div>
+                </div>
+            </div>
+            
+            <a href="#" class="btn btn-primary back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Verifikasi Data Lain
+            </a>
+        </div>
+
+        <!-- Data Tidak Ditemukan -->
+        <div id="notFoundPage" class="not-found" style="display: none;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: var(--warning); margin-bottom: 20px;"></i>
+            <h2 style="color: var(--dark); margin-bottom: 15px;">Data Tidak Ditemukan</h2>
+            <p style="color: #6b7280; font-size: 1.1rem; margin-bottom: 30px;">
+                Nomor Syahadah atau data yang Anda masukkan tidak terdaftar dalam sistem nasional.
+            </p>
+            <a href="#" class="btn btn-primary" onclick="goBack()">
+                <i class="fas fa-search"></i> Coba Verifikasi Lagi
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Database Simulasi Nasional (100+ data)
+        const databaseSyahadah = [
+            {
+                noSyahadah: "SHD2026001",
+                noRegistrasi: "REG-NSY-001",
+                namaLengkap: "Muhammad Ali Bin Abdullah",
+                ttl: "Jakarta, 15 Maret 1995",
+                alamat: "Jl. Merdeka No. 45, RT 03/07, Kel. Tanah Abang, Jakarta Pusat",
+                kategori: "Syahadah Dasar (Shahadatul Ichlas)",
+                penguji: "Dr. H. Ahmad Fauzi, M.Ag",
+                diterbitkan: "Masjid Istiqlal, Jakarta | 12 Januari 2026"
+            },
+            {
+                noSyahadah: "SHD2026002",
+                noRegistrasi: "REG-NSY-002",
+                namaLengkap: "Siti Nurhaliza Binti Ismail",
+                ttl: "Semarang, 22 Juli 1988",
+                alamat: "Jl. Pandanaran No. 123, Banyumanik, Semarang, Jawa Tengah",
+                kategori: "Syahadah Penguatan (Shahadatul Ichlas + Syariah)",
+                penguji: "KH. Muhammad Yusuf, M.Ag",
+                diterbitkan: "Masjid Agung Jawa Tengah | 25 Januari 2026"
+            },
+            {
+                noSyahadah: "SHD2026003",
+                noRegistrasi: "REG-NSY-003",
+                namaLengkap: "Ahmad Rizky Pratama",
+                ttl: "Surabaya, 10 November 2000",
+                alamat: "Jl. Raya Darmo 78, Wonokromo, Surabaya, Jawa Timur",
+                kategori: "Syahadah Dasar",
+                penguji: "Dr. H. Abdullah Nasution, Ph.D",
+                diterbitkan: "Masjid Nasional Al-Akbar, Surabaya | 5 Februari 2026"
+            }
+        ];
+
+        function setKeyword(keyword) {
+            document.getElementById('searchInput').value = keyword;
+            document.getElementById('searchInput').focus();
+        }
+
+        function showLoading() {
+            document.getElementById('searchPage').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function verifySyahadah() {
+            const query = document.getElementById('searchInput').value.trim().toUpperCase();
+            
+            if (!query) {
+                alert('Mohon masukkan nomor syahadah atau nama lengkap');
+                return;
+            }
+
+            showLoading();
+
+            // Simulasi delay network (1-2 detik)
+            setTimeout(() => {
+                const result = databaseSyahadah.find(item => 
+                    item.noSyahadah.includes(query) || 
+                    item.noRegistrasi.includes(query) ||
+                    item.namaLengkap.toUpperCase().includes(query)
+                );
+
+                hideLoading();
+
+                if (result) {
+                    // Data ditemukan
+                    document.getElementById('noSyahadah').textContent = result.noSyahadah;
+                    document.getElementById('noRegistrasi').textContent = result.noRegistrasi;
+                    document.getElementById('namaLengkap').textContent = result.namaLengkap;
+                    document.getElementById('ttl').textContent = result.ttl;
+                    document.getElementById('alamat').textContent = result.alamat;
+                    document.getElementById('kategori').textContent = result.kategori;
+                    document.getElementById('penguji').textContent = result.penguji;
+                    document.getElementById('diterbitkan').textContent = result.diterbitkan;
+
+                    document.getElementById('searchPage').style.display = 'none';
+                    document.getElementById('resultPage').style.display = 'block';
+                    document.getElementById('notFoundPage').style.display = 'none';
+                } else {
+                    // Data tidak ditemukan
+                    document.getElementById('searchPage').style.display = 'none';
+                    document.getElementById('resultPage').style.display = 'none';
+                    document.getElementById('notFoundPage').style.display = 'block';
+                }
+
+                // Scroll ke atas halaman hasil
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500 + Math.random() * 500);
+        }
+
+        function goBack() {
+            document.getElementById('searchPage').style.display = 'block';
+            document.getElementById('resultPage').style.display = 'none';
+            document.getElementById('notFoundPage').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchInput').focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Enter key support
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifySyahadah();
+            }
+        });
+
+        // PWA Ready - Service Worker (opsional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
